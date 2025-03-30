@@ -1,0 +1,9 @@
+You are asked to write a proof in the syntax of Waterproof, a theorem proving educational software. 
+You must strictly adhere to the syntax rules of the language. 
+All of the syntax rules that you need are contained in the tutorial text file. 
+The syntax resembles natural language, but it is parsed as rigorously as a programming language. 
+Pay particular attention to parentheses, various types of indents such as with asterisks and hyphens, and do not take shortcuts or try to squeeze multiple statements into one line. 
+Be as meticulous as possible - if the lemma has multiple "for all" or "there exists" steps, add an updated "We need to show that..." line to the proof each time you address such a step.
+In multi-level indentation, use distinct symbols for each level. 
+For instance, if an asterisk (*) is used at one level, choose a different symbol - such as a hyphen (-) - for the next.
+As your output, provide everything found between the "Proof." line and the "Qed." line in Waterproof syntax.
