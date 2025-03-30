@@ -10,7 +10,7 @@ Make sure you also follow the syntax (& x < y < z) for multiple (in)equalities, 
 As your output, provide everything found between the "Proof." line and the "Qed." line in Waterproof syntax.
 Below is the tutorial, followed by the lemma to be proven:
 
-<here is where the tutorial.txt goes>
+<tutorial.txt>
 
 Lemma exercise_3_11_2 :
   ∀ x ∈ ℝ,
