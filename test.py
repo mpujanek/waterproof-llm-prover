@@ -7,14 +7,22 @@ with open("tutorial.txt", "r") as file:
 with open("generic_wp_prompt.txt", "r") as file:
     prompt = file.read()
 
-instruct = prompt + tutorial
+prompt = prompt + tutorial
 
-with open("proof.txt", "r") as file:
-    input_text = file.read()
+proof = """
+Lemma exercise_3_11_2 :
+  ∀ x ∈ ℝ,
+    ∃ y ∈ ℝ,
+      ∀ u > 0,
+          ∃ v > 0, x + u < y + v.
+Proof.
+"""
+
+prompt = prompt + proof
 
 response = client.responses.create(
-    model="gpt-4o",
-    input="Write a one-sentence bedtime story about a unicorn."
+    model="o3-mini",
+    input=prompt
 )
 
 print(response.output_text)
