@@ -33,5 +33,6 @@ Choose v := (u + 1).
 - We conclude that (x + u < y + v).
 Qed.
 
-Comments: The prompt is a bit shorter than the most recent version, but it still worked very well out of the box. 
+## Comments: 
+The prompt is a bit shorter than the most recent version, but it still worked very well out of the box. 
 Cost: $0.24
