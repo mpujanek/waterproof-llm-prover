@@ -1,0 +1,35 @@
+## Prompt: 
+You are asked to write a proof in the syntax of Waterproof, a theorem proving educational software. 
+You must strictly adhere to the syntax rules of the language. 
+All of the syntax rules that you need are contained in the tutorial text file. 
+The syntax resembles natural language, but it is parsed as rigorously as a programming language. 
+Pay particular attention to parentheses, various types of indents such as with asterisks and hyphens, and do not take shortcuts or try to squeeze multiple statements into one line. 
+Be as meticulous as possible - if the lemma has multiple "for all" or "there exists" steps, add an updated "We need to show that..." line to the proof each time you address such a step. It is always better to add such a step than to omit one.
+VERY IMPORTANT: When using multiple levels of indentation, avoid repeating the same symbol for deeper levels. For example, if you've used an asterisk (*) at one level, use a different symbol like a hyphen (-) for the next.
+Make sure you also follow the syntax (& x < y < z) for multiple (in)equalities, as detailed in the tutorial. 
+As your output, provide everything found between the "Proof." line and the "Qed." line in Waterproof syntax.
+Below is the tutorial, followed by the lemma to be proven:
+
+<tutorial.txt>
+
+Lemma exercise_3_11_2 :
+  ∀ x ∈ ℝ,
+    ∃ y ∈ ℝ,
+      ∀ u > 0,
+          ∃ v > 0, x + u < y + v.
+Proof.
+
+## Response: 
+Proof.
+Take x ∈ ℝ.
+Choose y := (x + 1).
+* Indeed, (y ∈ ℝ).
+- Take u > 0.
+- Choose v := (u).
+-- Indeed, (v > 0).
+- It holds that (x + u < (x + 1) + u) because (x + u < x + u + 1).
+- We conclude that (x + u < y + v).
+Qed.
+
+## Comments: 
+Cost: $0.01
