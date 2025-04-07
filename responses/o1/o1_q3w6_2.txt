@@ -34,3 +34,4 @@ Qed.
 
 ## Comments: 
 Cost: did not record
+Almost compiles, missing the * in the 4th line of the proof ("Proof." is line 0).

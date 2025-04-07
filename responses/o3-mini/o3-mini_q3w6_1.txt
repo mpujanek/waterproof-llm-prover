@@ -33,5 +33,5 @@ Choose v := (u + 1).
 Qed.
 
 ## Comments:
-The output could have more "We need to show that..." assertions. 
+Almost compiles, missing the * in the 4th line of the proof.
 Cost: $0.01

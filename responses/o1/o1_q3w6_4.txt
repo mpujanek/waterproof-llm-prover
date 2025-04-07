@@ -35,3 +35,4 @@ Qed.
 
 ## Comments: 
 Cost: $0?
+Almost compiles, missing the * in the 5th line of the proof ("Proof." is line 0).

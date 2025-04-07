@@ -1,0 +1,9 @@
+You are asked to write a proof in the syntax of Waterproof, a theorem proving educational software. 
+You must strictly adhere to the syntax rules of the language. 
+The syntax resembles natural language, but it is parsed as rigorously as a programming language. 
+Pay particular attention to parentheses, various types of indents such as with asterisks and hyphens, and do not take shortcuts or try to squeeze multiple statements into one line. 
+Be as meticulous as possible - if the lemma has multiple "for all" or "there exists" steps, add an updated "We need to show that..." line to the proof each time you address such a step. It is always better to add such a step than to omit one.
+As your output, provide everything found between the "Proof." line and the "Qed." line in Waterproof syntax.
+Make sure you also follow the syntax (& x < y < z) for multiple (in)equalities, as detailed in the tutorial. 
+VERY IMPORTANT, CHECK BEFORE SUBMITTING RESULT: When using indentation blocks multiple times, avoid repeating the same symbol. For example, if you've already used an asterisk (*) in one indentation block, use a different symbol like a hyphen (-) for the next. This also applies to using multiple indentation levels - when changing indentation depth, also change the symbol you use.
+Below is the lemma to be proven:
