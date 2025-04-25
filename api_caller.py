@@ -43,7 +43,7 @@ def response_anthropic(model, input):
     response = anthropic_client.messages.create(
         model=model,
         max_tokens=20000,
-        #thinking = configure_thinking(thinking, 16000),
+        thinking = configure_thinking(model, 16000),
         messages=[
             {"role": "user", "content": input}
         ]
@@ -58,6 +58,13 @@ def response_anthropic(model, input):
     output["thinking mode"] = True
 
     return output
+
+
+def configure_thinking(model, token_budget: int = 1000):
+    if model == "Claude 3.7 Sonnet + thinking":
+        return {"type": "enabled", "budget_tokens": token_budget}
+    else:
+        return {"type": "disabled"}
 
 
 def estimate_cost(model_name, prompt_tokens, completion_tokens):
