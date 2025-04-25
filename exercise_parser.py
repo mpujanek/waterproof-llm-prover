@@ -1,7 +1,9 @@
 
 
 def parse(exercise_numbers):
-    exercise = proof = """
+    print("Parsing exercise sheets...")
+
+    exercises = {"3.11.2": """
         Variable f : ℝ → ℝ.
         Variable g : ℝ → ℝ.
 
@@ -10,5 +12,5 @@ def parse(exercise_numbers):
             (∀ M2 < 4, ∃ z > 0, ∀ x > z, g (x) > M2) ⇒
             ∃ c ∈ ℝ, f(c) + g(c) > 10.
         Proof.
-    """
-    return exercise
+    """}
+    return exercises

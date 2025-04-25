@@ -2,14 +2,14 @@ from exercise_parser import parse
 from prompt_composer import compose
 from api_caller import call_api
 from proof_compiler import compile_output
-from json_exporter import export_json, create_folder
+from json_exporter import export_json
 
 ## STEP 1: Specify models to test
 
 # List of models to choose from (put chosen ones in "models" variable)
 supported_models = ["o4-mini", "o3", "o3-mini", "o1", "o1-mini", "o1-pro", "claude-3-7-sonnet", "claude-3-7-sonnet-thinking"]
 
-models = []
+models = ["o3-mini"]
 
 
 ## STEP 2: Specify what exercises to test on
@@ -43,7 +43,8 @@ def run(models, exercise_numbers, prompt_filename, tutorial_filename):
             print(f"Unsupported model specified: {model}")
             return
 
-    # Parse exercise sheets to extract desired exercises
+    # Parse exercise sheets to extract desired exercises 
+    # Returns dict with exercise numbers as keys and content as values
     exercises = parse(exercise_numbers)
 
     # Compose prompt from given files
@@ -52,14 +53,14 @@ def run(models, exercise_numbers, prompt_filename, tutorial_filename):
     # Run all models on all exercises, export output
     for exercise in exercises:
         # Concatenate exercise to the prompt
-        input = prompt + "\n" + exercise
+        input = prompt + "\n" + exercises[exercise]
 
         for model in models:
             # Call APIs of given model with input
             output = call_api(model, input)
 
             # Compile response to check if proof is correct
-            proof_result = compile_output(output["response"])
+            proof_result = compile_output(output["output"])
 
             # Export result to JSON
             export_json(model, exercise, output, proof_result, directory)

@@ -5,8 +5,10 @@ from datetime import datetime
 def export_json(model, exercise, output, proof_result, directory):
     # Prepare data
     data = {
-    "solution": output["solution"],
+    "output": output["output"],
     "token_count": output["token_count"],
+    "input_tokens": output["input_tokens"],
+    "output_tokens": output["output_tokens"],
     "cost": output["cost"],
     "thinking_mode": output["thinking_mode"],
     "compiles": proof_result
@@ -31,3 +33,5 @@ def export_json(model, exercise, output, proof_result, directory):
     # Save to new file
     with open(file_path, 'w') as f:
         json.dump(data, f, indent=4)
+
+    print(f"Finished running {model} on exercise {exercise}.")
