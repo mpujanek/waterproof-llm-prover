@@ -2,12 +2,12 @@ from exercise_parser import parse
 from prompt_composer import compose
 from api_caller import call_api
 from proof_compiler import compile_output
-from json_exporter import export_json
+from json_exporter import export_json, create_folder
 
 ## STEP 1: Specify models to test
 
 # List of models to choose from (put chosen ones in "models" variable)
-supported_models = []
+supported_models = ["o4-mini", "o3", "o3-mini", "o1", "o1-mini", "o1-pro", "claude-3-7-sonnet", "claude-3-7-sonnet-thinking"]
 
 models = []
 
@@ -25,6 +25,13 @@ exercise_numbers = []
 
 prompt_filename = "generic_wp_prompt.txt"
 tutorial_filename = "tutorial.txt"
+
+
+## STEP 3: Specify folder to store results
+# Define below a master folder (in this directory) in which the test results will be stored.
+# Each test run will have its results stored in a new folder within the specified folder.
+
+directory = "responses"
 
 
 ## Run tests
@@ -49,12 +56,12 @@ def run(models, exercise_numbers, prompt_filename, tutorial_filename):
 
         for model in models:
             # Call APIs of given model with input
-            response = call_api(model, input)
+            output = call_api(model, input)
 
             # Compile response to check if proof is correct
-            result = compile_output(response)
+            proof_result = compile_output(output["response"])
 
             # Export result to JSON
-            export_json(result)
+            export_json(model, exercise, output, proof_result, directory)
 
 run(models, exercise_numbers, prompt_filename, tutorial_filename)
