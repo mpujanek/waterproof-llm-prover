@@ -5,7 +5,7 @@ openai_client = OpenAI()
 anthropic_client = Anthropic()
 
 openai_models = ["o4-mini", "o3", "o3-mini", "o1", "o1-mini", "o1-pro"]
-anthropic_models = ["Claude 3.7 Sonnet", "Claude 3.7 Sonnet + thinking"]
+anthropic_models = ["claude-3-7-sonnet", "claude-3-7-sonnet-thinking"]
 
 def call_api(model, input):
     response = None
@@ -30,9 +30,9 @@ def response_openai(model, input):
     completion_tokens = response.usage.completion_tokens
 
     output["solution"] = response.output_text
-    output["token count"] = prompt_tokens + completion_tokens
+    output["token_count"] = prompt_tokens + completion_tokens
     output["cost"] = estimate_cost(model, prompt_tokens, completion_tokens)
-    output["thinking mode"] = (model == "Claude 3.7 Sonnet + thinking")
+    output["thinking_mode"] = (model == "claude-3-7-sonnet-thinking")
 
     return output
 
@@ -53,15 +53,15 @@ def response_anthropic(model, input):
     completion_tokens = response.usage.output_tokens
 
     output["solution"] = next(item.text for item in response.content if item.type == "text")
-    output["token count"] = prompt_tokens + completion_tokens
+    output["token_count"] = prompt_tokens + completion_tokens
     output["cost"] = estimate_cost(model, prompt_tokens, completion_tokens)
-    output["thinking mode"] = True
+    output["thinking_mode"] = True
 
     return output
 
 
 def configure_thinking(model, token_budget: int = 1000):
-    if model == "Claude 3.7 Sonnet + thinking":
+    if model == "claude-3-7-sonnet-thinking":
         return {"type": "enabled", "budget_tokens": token_budget}
     else:
         return {"type": "disabled"}
@@ -70,8 +70,8 @@ def configure_thinking(model, token_budget: int = 1000):
 def estimate_cost(model_name, prompt_tokens, completion_tokens):
     # Pricing in USD per 1M tokens (as of early 2025, change if outdated)
     pricing = {
-        "Claude 3.7 Sonnet": {"input": 3.0, "output": 15.0},
-        "Claude 3.7 Sonnet + thinking": {"input": 3.0, "output": 15.0},
+        "claude-3-7-sonnet": {"input": 3.0, "output": 15.0},
+        "claude-3-7-sonnet-thinking": {"input": 3.0, "output": 15.0},
         "o4-mini": {"input": 1.1, "output": 4.4},
         "o3": {"input": 10.0, "output": 40.0},
         "o3-mini": {"input": 1.1, "output": 4.4},
