@@ -2,16 +2,19 @@ import json
 import os
 from datetime import datetime
 
-def export_json(model, exercise, output, proof_result, directory):
+def export_json(model, exercise, exercises, prompt, output, proof_result, directory):
     # Prepare data
     data = {
-    "output": output["output"],
-    "token_count": output["token_count"],
-    "input_tokens": output["input_tokens"],
-    "output_tokens": output["output_tokens"],
-    "cost": output["cost"],
-    "thinking_mode": output["thinking_mode"],
-    "compiles": proof_result
+        "model": model,
+        "prompt": prompt,
+        "exercise": exercises[exercise],
+        "output": output["output"],
+        "token_count": output["token_count"],
+        "input_tokens": output["input_tokens"],
+        "output_tokens": output["output_tokens"],
+        "cost": output["cost"],
+        "thinking_mode": output["thinking_mode"],
+        "compiles": proof_result
     }
 
     # Get current date and time for folder name

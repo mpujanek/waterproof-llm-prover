@@ -48,7 +48,8 @@ def run(models, exercise_numbers, prompt_filename, tutorial_filename):
     exercises = parse(exercise_numbers)
 
     # Compose prompt from given files
-    prompt = compose(prompt_filename, tutorial_filename)
+    generic_prompt, tutorial = compose(prompt_filename, tutorial_filename)
+    prompt = generic_prompt + tutorial
 
     # Run all models on all exercises, export output
     for exercise in exercises:
@@ -62,7 +63,7 @@ def run(models, exercise_numbers, prompt_filename, tutorial_filename):
             # Compile response to check if proof is correct
             proof_result = compile_output(output["output"])
 
-            # Export result to JSON
-            export_json(model, exercise, output, proof_result, directory)
+            # Export result to JSON (tutorial is big so it is not included in JSON)
+            export_json(model, exercise, exercises, generic_prompt, output, proof_result, directory)
 
 run(models, exercise_numbers, prompt_filename, tutorial_filename)

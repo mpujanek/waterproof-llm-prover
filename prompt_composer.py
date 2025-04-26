@@ -7,6 +7,4 @@ def compose(prompt_filename, tutorial_filename):
     with open(tutorial_filename, "r") as file:
         tutorial = file.read()
 
-    prompt = generic_prompt + tutorial
-
-    return prompt
+    return generic_prompt, tutorial
