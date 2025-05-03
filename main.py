@@ -13,7 +13,7 @@ models = ["o3-mini"]
 
 
 ## STEP 2: Specify what exercises to test on
-# Input a list of strings of the format "3.11.2" where 3 is the chapter name,
+# Input a list of strings of the format "3_11_2" where 3 is the chapter name,
 # 11 is the subchapter name, and 2 is the number of the exercise
 # Input "all" if you want to test models on all exercises
 
