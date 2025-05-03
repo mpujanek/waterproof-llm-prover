@@ -1,3 +1,5 @@
+Section Prop_6_2_2_i.
+
 Variable a : ℕ → ℝ.
 Definition a_opp (n : ℕ) := - a(n).
 

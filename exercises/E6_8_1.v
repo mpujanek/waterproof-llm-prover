@@ -1,3 +1,5 @@
+Section Prop_6_1_4.
+
 Variable a : ℕ → ℝ.
 
 Lemma exercise_6_8_1 :

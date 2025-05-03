@@ -1,3 +1,5 @@
+Section ex_4_9_2.
+
 Variable A : subset(ℝ).
 Hypothesis A_bdd_above : (∃ b ∈ ℝ, b is an _upper bound_ for A).
 Hypothesis A_nonempty : (∃ a ∈ ℝ, a ∈ A).

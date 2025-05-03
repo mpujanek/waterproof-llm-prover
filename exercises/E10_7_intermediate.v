@@ -1,3 +1,5 @@
+Section exercise_10_7_3.
+
 Variable (X : Metric_Space) (a b : ℕ → X) (p : X).
 Notation "'dist(' x , y )" := (dist X x y) (format "'dist(' x ,  y ')'").
 

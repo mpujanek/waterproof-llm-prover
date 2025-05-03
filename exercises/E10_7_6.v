@@ -1,7 +1,4 @@
-Inductive Color : Set :=
-| blue : Color
-| orange : Color.
-
+Section colors.
 Variable P : ℕ → Color.
 
 Parameter infinitely_many_blues :

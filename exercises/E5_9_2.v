@@ -1,3 +1,9 @@
+Section Prop_5_8_1.
+
+Context (X : Metric_Space).
+Notation "'dist(' x , y )" := (dist X x y)
+  (format "'dist(' x ,  y ')'").
+
 Variables (a : ℕ → X) (k : ℕ) (p : X).
 
 Definition a_shift (n : nat) := a (n + k)%nat.

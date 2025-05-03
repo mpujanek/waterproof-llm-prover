@@ -1,3 +1,5 @@
+Section Exercise_3_11_4.
+
 Variable f : ℝ → ℝ.
 Variable g : ℝ → ℝ.
 
