@@ -1,5 +1,7 @@
 coq_with_imports() {
-    cat imports.v "$1" > /tmp/tmp_coq.v && coqc -w -all /tmp/tmp_coq.v && rm /tmp/tmp_coq.v
+    tmpfile="/tmp/$(basename "$1")"
+    imports="imports/$(basename "$1")"
+    cat "$imports" "$1" > "$tmpfile" && coqc -w -all "$tmpfile" && rm "$tmpfile"
 }
 
 for f in *.v; do
