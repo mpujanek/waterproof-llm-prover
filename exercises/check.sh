@@ -1,7 +1,7 @@
 coq_with_imports() {
     tmpfile="/tmp/$(basename "$1")"
     imports="imports/$(basename "$1")"
-    cat "$imports" "$1" > "$tmpfile" && coqc -w -all "$tmpfile" && rm "$tmpfile"
+    cat libimports.v "$imports" "$1" > "$tmpfile" && coqc -w -all "$tmpfile" && rm "$tmpfile"
 }
 
 if [[ -z "$1" ]]; then

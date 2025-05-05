@@ -13,3 +13,4 @@ Definition n (k : nat) := (2 * k).
 
 Lemma n_is_index_sequence : n is an _index sequence_.
 Proof.
+Expand the definition of index sequence.
