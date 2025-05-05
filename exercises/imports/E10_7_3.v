@@ -27,7 +27,7 @@ Notation "'min(' x , y )" := (Rmin x y)
 
 Open Scope metric_scope.
 
-Coercion Base : Metric_Space >-> Sortclass.
+(* Coercion Base : Metric_Space >-> Sortclass. *)
 
 (* For readability. *)
 Definition prop_10_3_1 := equivalent_subsequence_convergence.
