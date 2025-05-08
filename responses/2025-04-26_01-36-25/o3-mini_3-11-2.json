@@ -1,7 +1,0 @@
-{
-    "output": "Proof.\nAssume that (\u2200 M1 \u2208 \u211d, \u2203 y > 0, \u2200 x > y, f(x) > M1) (Hf).\nAssume that (\u2200 M2 < 4, \u2203 z > 0, \u2200 x > z, g(x) > M2) (Hg).\nWe need to show that (\u2203 c \u2208 \u211d, f(c) + g(c) > 10).\n\nUse M2 := (3) in (Hg).\n* Indeed, (3 < 4).\n* Obtain such a z.\nWe need to show that (\u2203 c \u2208 \u211d, f(c) + g(c) > 10).\n\nUse M1 := (7) in (Hf).\n* Indeed, (7 \u2208 \u211d).\n* Obtain such a y.\nWe need to show that (f(c) + g(c) > 10) for a suitable c \u2208 \u211d.\n\nChoose c := (y + z).\n- Indeed, (y + z \u2208 \u211d).\n- It holds that (y + z > y) since (z > 0).\n  We conclude that (f(y + z) > 7).\n- It holds that (y + z > z) since (y > 0).\n  We conclude that (g(y + z) > 3).\n- We conclude that (f(y + z) + g(y + z) > 7 + 3).\nWe conclude that (f(y + z) + g(y + z) > 10).\n\nQed.",
-    "token_count": 8788,
-    "cost": 0.0249095,
-    "thinking_mode": true,
-    "compiles": true
-}
