@@ -33,6 +33,6 @@ def compile_output(proof, imports, exercise, exercise_number):
             print("Line with error:", lines[line_number - 1])
         else:
             print("No line number found.")
-        return result.stderr
+        return result.stderr, lines[line_number - 1]
 
-    return "yes"
+    return "yes", ""
