@@ -2,7 +2,7 @@ import json
 import os
 from datetime import datetime
 
-def export_json(model, exercise, exercises, prompt, output, proof_result, directory):
+def export_json(model, exercise, exercises, prompt, output, proof_result, folder_path):
     # Prepare data
     data = {
         "model": model,
@@ -17,6 +17,18 @@ def export_json(model, exercise, exercises, prompt, output, proof_result, direct
         "compiles": proof_result
     }
 
+    # Create file name
+    exercise_name = exercise.replace("_", "-")
+    filename = f"{model}_{exercise_name}.json"
+    file_path = os.path.join(folder_path, filename)
+
+    # Save to new file
+    with open(file_path, 'w') as f:
+        json.dump(data, f, indent=4)
+
+    print(f"Finished running {model} on exercise {exercise}.")
+
+def make_folder(directory):
     # Get current date and time for folder name
     now = datetime.now()
     folder_name = now.strftime("%Y-%m-%d_%H-%M-%S")
@@ -28,13 +40,4 @@ def export_json(model, exercise, exercises, prompt, output, proof_result, direct
     # Create the new folder
     os.makedirs(folder_path)
 
-    # Create file name
-    exercise_name = exercise.replace(".", "-")
-    filename = f"{model}_{exercise_name}.json"
-    file_path = os.path.join(folder_path, filename)
-
-    # Save to new file
-    with open(file_path, 'w') as f:
-        json.dump(data, f, indent=4)
-
-    print(f"Finished running {model} on exercise {exercise}.")
+    return folder_path

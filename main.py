@@ -1,8 +1,8 @@
 from exercise_parser import parse, clean
 from prompt_composer import compose
-#from api_caller import call_api
+from api_caller import call_api
 from proof_compiler import compile_output
-from json_exporter import export_json
+from json_exporter import export_json, make_folder
 
 ## STEP 1: Specify models to test
 
@@ -12,7 +12,7 @@ supported_models = [
     "claude-3-7-sonnet", "claude-3-7-sonnet-thinking"
 ]
 
-models = ["o3-mini"]
+models = ["o3-mini", "o4-mini"]
 
 
 ## STEP 2: Specify what exercises to test on
@@ -36,7 +36,7 @@ all_exercises = [
     "13_11_2", "13_11_3"
 ]
 
-exercise_numbers = ["11_not_closed"]
+exercise_numbers = ["3_11_1", "6_8_2"]
 
 
 ## STEP 3: Specify prompt and provide a syntax tutorial
@@ -70,6 +70,9 @@ def run(models, exercise_numbers, prompt_filename, tutorial_filename):
     generic_prompt, tutorial = compose(prompt_filename, tutorial_filename)
     prompt = generic_prompt + tutorial
 
+    # Make a folder in the specified directory for storing results of this run
+    folder_path = make_folder(directory)
+
     # Run all models on all exercises, export output
     for exercise in exercises:
         # Concatenate exercise to the prompt
@@ -79,13 +82,17 @@ def run(models, exercise_numbers, prompt_filename, tutorial_filename):
             # Call APIs of given model with input
             output = call_api(model, input)
 
-            # Clean output before compiling
+            # Extract the LLM's proof attempt
+            proof_attempt = output["output"]
+
+            # Clean output before compiling (remove leading/trailing "Proof."/"Qed.")
+            proof_attempt = clean(proof_attempt)
 
             # Compile response to check if proof is correct
-            proof_result = compile_output(output["output"], imports[exercise], exercises[exercise])
+            proof_result = compile_output(proof_attempt, imports[exercise], exercises[exercise], exercise)
 
             # Export result to JSON (tutorial is big so it is not included in JSON)
-            export_json(model, exercise, exercises, generic_prompt, output, proof_result, directory)
+            export_json(model, exercise, exercises, generic_prompt, output, proof_result, folder_path)
 
 
 proof = """
@@ -110,8 +117,8 @@ with open("exercises/imports/E3_11_2.v", "r") as file:
 with open("exercises/E3_11_2.v", "r") as file:
             exercise = file.read()
 
-print(compile_output(proof, imports, exercise) == "")
+#print(compile_output(proof, imports, exercise) == "")
 
 #print(parse(exercise_numbers))
 
-#run(models, exercise_numbers, prompt_filename, tutorial_filename)
+run(models, exercise_numbers, prompt_filename, tutorial_filename)

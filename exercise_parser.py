@@ -17,7 +17,7 @@ def parse(exercise_numbers):
         # Get exercise imports path and open it
         imports_path = f"./exercises/imports/E{exercise}.v"
         with open(imports_path, "r") as file:
-            imports = file.read()
+            exerciseimports = file.read()
 
         # Get all library imports
         libimports_path = f"./exercises/libimports.v"
@@ -25,7 +25,7 @@ def parse(exercise_numbers):
             libimports = file.read()
 
         exercises[exercise] = content
-        imports[exercise] = libimports + imports
+        imports[exercise] = libimports + exerciseimports
 
     return exercises, imports
 
