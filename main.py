@@ -12,7 +12,7 @@ supported_models = [
     "claude-3-7-sonnet", "claude-3-7-sonnet-thinking"
 ]
 
-models = ["o3-mini", "o4-mini"]
+models = ["o4-mini"]
 
 
 ## STEP 2: Specify what exercises to test on
@@ -36,7 +36,7 @@ all_exercises = [
     "13_11_2", "13_11_3"
 ]
 
-exercise_numbers = ["3_11_1", "6_8_2"]
+exercise_numbers = ["2_non_degenerate_2"]
 
 
 ## STEP 3: Specify prompt and provide a syntax tutorial
