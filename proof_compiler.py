@@ -30,7 +30,10 @@ def compile_output(proof, imports, exercise, exercise_number):
         match = re.search(r'line (\d+)', result.stderr)
         if match:
             line_number = int(match.group(1))
-            print("Line with error:", lines[line_number - 1])
+            if line_number:
+                print("Line with error:", lines[line_number - 1])
+            else:
+                print("No line number found.")
         else:
             print("No line number found.")
         return result.stderr, lines[line_number - 1]

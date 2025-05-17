@@ -13,7 +13,7 @@ supported_models = [
     "gemini-2.5-flash-preview-04-17", "gemini-2.5-pro-preview-05-06"
 ]
 
-models = ["o4-mini"]
+models = ["gemini-2.5-flash-preview-04-17"]
 
 
 ## STEP 2: Specify what exercises to test on

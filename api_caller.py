@@ -73,10 +73,9 @@ def response_anthropic(model, input):
 def response_google(model, input):
     output = {}
 
-    response = gemini_client.generate_content(
+    response = gemini_client.models.generate_content(
         model=model,
-        contents=[{"role": "user", "parts": [{"text": input}]}],
-        generation_config={"max_output_tokens": 8192}
+        contents=[{"role": "user", "parts": [{"text": input}]}]
     )
 
     input_tokens = response.usage_metadata.prompt_token_count
