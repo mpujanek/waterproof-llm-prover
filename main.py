@@ -9,7 +9,8 @@ from json_exporter import export_json, make_folder
 # List of models to choose from (put chosen ones in "models" variable)
 supported_models = [
     "o4-mini", "o3", "o3-mini", "o1", "o1-mini", "o1-pro",
-    "claude-3-7-sonnet", "claude-3-7-sonnet-thinking"
+    "claude-3-7-sonnet", "claude-3-7-sonnet-thinking",
+    "gemini-2.5-flash-preview-04-17", "gemini-2.5-pro-preview-05-06"
 ]
 
 models = ["o4-mini"]

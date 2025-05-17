@@ -1,11 +1,14 @@
 from openai import OpenAI
 from anthropic import Anthropic
+from google import genai
 
 openai_client = OpenAI()
 anthropic_client = Anthropic()
+gemini_client = genai.Client()
 
 openai_models = ["o4-mini", "o3", "o3-mini", "o1", "o1-mini", "o1-pro"]
 anthropic_models = ["claude-3-7-sonnet", "claude-3-7-sonnet-thinking"]
+google_models = ["gemini-2.5-flash-preview-04-17", "gemini-2.5-pro-preview-05-06"]
 
 def call_api(model, input):
     print(f"Calling API for {model}...")
@@ -16,6 +19,8 @@ def call_api(model, input):
         response = response_openai(model=model, input=input)
     elif model in anthropic_models:
         response = response_anthropic(model=model, input=input)
+    elif model in google_models:
+        response = response_google(model=model, input=input)
 
     return response
 
@@ -65,6 +70,27 @@ def response_anthropic(model, input):
 
     return output
 
+def response_google(model, input):
+    output = {}
+
+    response = gemini_client.generate_content(
+        model=model,
+        contents=[{"role": "user", "parts": [{"text": input}]}],
+        generation_config={"max_output_tokens": 8192}
+    )
+
+    input_tokens = response.usage_metadata.prompt_token_count
+    output_tokens = response.usage_metadata.candidates_token_count
+
+    output["output"] = response.candidates[0].content.parts[0].text
+    output["input_tokens"] = input_tokens
+    output["output_tokens"] = output_tokens
+    output["token_count"] = input_tokens + output_tokens
+    output["cost"] = estimate_cost(model, input_tokens, output_tokens)
+    output["thinking_mode"] = (model == "gemini-2.5-flash")  # only Flash has thinking tiers
+
+    return output
+
 
 def configure_thinking(model, token_budget: int = 1000):
     if model == "claude-3-7-sonnet-thinking":
@@ -83,7 +109,9 @@ def estimate_cost(model_name, input_tokens, output_tokens):
         "o3-mini": {"input": 1.1, "output": 4.4},
         "o1": {"input": 15.0, "output": 60.0},
         "o1-mini": {"input": 1.1, "output": 4.4},
-        "o1-pro": {"input": 150.0, "output": 600.0}
+        "o1-pro": {"input": 150.0, "output": 600.0},
+        "gemini-2.5-flash-preview-04-17": {"input": 0.15, "output": 0.60},
+        "gemini-2.5-pro-preview-05-06": {"input": 1.25, "output": 10.0}
     }
     
     model_price = pricing.get(model_name)
