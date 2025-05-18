@@ -2,10 +2,17 @@ import subprocess
 import tempfile
 import re
 
+def close_section(file_content: str) -> str:
+    match = re.search(r'^Section\s+([^\s.]+)\.', file_content, re.MULTILINE)
+    if match:
+        section_name = match.group(1)
+        return f'\nEnd {section_name}.'
+    return ''
+
 def compile_output(proof, imports, exercise, exercise_number):
     print("Compiling model output...")
 
-    full_text = imports + exercise + "\n" + proof + "\nQed."
+    full_text = imports + exercise + "\n" + proof + "\nQed." + close_section(exercise)
 
     with tempfile.NamedTemporaryFile(mode="w+", suffix=".v", prefix="E" + exercise_number + "_", delete=False) as tmpfile:
         tmpfile.write(full_text)
