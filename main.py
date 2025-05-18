@@ -42,6 +42,7 @@ exercise_numbers = ["2_non_degenerate_2"]
 
 ## STEP 3: Specify prompt and provide a syntax tutorial
 # These are loaded from files in this directory. 
+# In the prompt file, specify where the tutorial is to be inserted using the marker "%tutorial%". 
 
 prompt_filename = "generic_wp_prompt.txt"
 tutorial_filename = "tutorial.txt"
@@ -68,8 +69,7 @@ def run(models, exercise_numbers, prompt_filename, tutorial_filename):
     exercises, imports = parse(exercise_numbers)
 
     # Compose prompt from given files
-    generic_prompt, tutorial = compose(prompt_filename, tutorial_filename)
-    prompt = generic_prompt + tutorial
+    no_tutorial_prompt, prompt = compose(prompt_filename, tutorial_filename)
 
     # Make a folder in the specified directory for storing results of this run
     folder_path = make_folder(directory)
@@ -93,7 +93,7 @@ def run(models, exercise_numbers, prompt_filename, tutorial_filename):
             proof_result, line_with_error = compile_output(proof_attempt, imports[exercise], exercises[exercise], exercise)
 
             # Export result to JSON (tutorial is big so it is not included in JSON)
-            export_json(model, exercise, exercises, generic_prompt, output, proof_result, folder_path, line_with_error)
+            export_json(model, exercise, exercises, no_tutorial_prompt, output, proof_result, folder_path, line_with_error)
 
 
 proof = """

@@ -144,6 +144,7 @@ We conclude that (a + b > - 1).
 Qed.
 
 ## 7. Chains of (in)equalities
+Using multiple inequalities requires using special syntax
 
 ### Example
 
@@ -458,4 +459,3 @@ We need to show that (- x^2 ≤ 0).
 It holds that (x^2 ≥ 0).
 We conclude that (- x^2 ≤ 0).
 Qed.
-
