@@ -1,10 +1,18 @@
 from openai import OpenAI
 from anthropic import Anthropic
 from google import genai
+from dotenv import load_dotenv
+import os
 
-openai_client = OpenAI()
-anthropic_client = Anthropic()
-gemini_client = genai.Client()
+load_dotenv()
+
+openai_key = os.getenv("OPENAI_API_KEY")
+anthropic_key = os.getenv("ANTHROPIC_API_KEY")
+google_key = os.getenv("GOOGLE_API_KEY")
+
+openai_client = OpenAI(api_key=openai_key)
+anthropic_client = Anthropic(api_key=anthropic_key)
+gemini_client = genai.Client(api_key=google_key)
 
 openai_models = ["o4-mini", "o3", "o3-mini", "o1", "o1-mini", "o1-pro"]
 anthropic_models = ["claude-3-7-sonnet", "claude-3-7-sonnet-thinking"]
