@@ -13,7 +13,13 @@ Definition n (k : nat) := (2 * k).
 
 Lemma n_is_index_sequence : n is an _index sequence_.
 Proof.
-(* add proof here? idk if necessary *)
+We need to show that (∀ k ∈ ℕ, n(k) < n(k + 1)).
+Take k ∈ ℕ.
+We need to show that (n(k) < n(k + 1))%nat.
+We need to show that (2 * k < 2 * (k + 1))%nat.
+It holds that (2 * k < 2 * k + 2)%nat.
+It holds that (2 * k + 2 = 2 * (k + 1))%nat.
+We conclude that (& 2 * k < 2 * k + 2 = 2 * (k + 1))%nat.
 Qed.
 
 Lemma c_n_k_equals_a_n_k : ∀ k ∈ ℕ, c(n(k)) = a(n(k)).

@@ -10,4 +10,4 @@ Below is the tutorial, followed by the lemma to be proven:
 
 %tutorial%
 
-Your final output should be pure Waterproof code, starting with "Proof." and ending with "Qed.". Do not enclose it in a code block or use backticks, simple plaintext is best. 
+Your final output should be pure Waterproof code, starting with "Proof." and ending with "Qed.". Do not enclose it in a code block and do not use backticks, simple plaintext is best. 

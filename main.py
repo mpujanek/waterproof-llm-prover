@@ -13,7 +13,7 @@ supported_models = [
     "gemini-2.5-flash-preview-04-17", "gemini-2.5-pro-preview-05-06"
 ]
 
-models = ["gemini-2.5-flash-preview-04-17"]
+models = ["gemini-2.5-flash-preview-04-17", "gemini-2.5-pro-preview-05-06", ]
 
 
 ## STEP 2: Specify what exercises to test on
@@ -37,7 +37,7 @@ all_exercises = [
     "13_11_2", "13_11_3"
 ]
 
-exercise_numbers = ["2_non_degenerate_2"]
+exercise_numbers = ["10_7_intermediate"]
 
 
 ## STEP 3: Specify prompt and provide a syntax tutorial
@@ -121,5 +121,8 @@ with open("exercises/E3_11_2.v", "r") as file:
 #print(compile_output(proof, imports, exercise) == "")
 
 #print(parse(exercise_numbers))
+
+#a, b = compose(prompt_filename, tutorial_filename)
+#print(b)
 
 run(models, exercise_numbers, prompt_filename, tutorial_filename)

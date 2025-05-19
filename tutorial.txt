@@ -459,3 +459,5 @@ We need to show that (- x^2 ≤ 0).
 It holds that (x^2 ≥ 0).
 We conclude that (- x^2 ≤ 0).
 Qed.
+
+### End of Waterproof tutorial.
