@@ -9,4 +9,4 @@ def compose(prompt_filename, tutorial_filename):
 
     full_prompt = no_tutorial_prompt.replace("%tutorial%", tutorial)
 
-    return no_tutorial_prompt, full_prompt
+    return no_tutorial_prompt, full_prompt, tutorial

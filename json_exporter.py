@@ -2,12 +2,14 @@ import json
 import os
 from datetime import datetime
 
-def export_json(model, exercise, exercises, prompt, output, proof_result, folder_path, line_with_error):
+def export_json(model, exercise, exercises, prompt, tutorial, output, proof_result, folder_path, line_with_error):
     # Prepare data
     data = {
         "model": model,
+        "exercise": exercise,
         "prompt": prompt,
-        "exercise": exercises[exercise],
+        "tutorial": tutorial,
+        "exercise_content": exercises[exercise],
         "output": output["output"],
         "token_count": output["token_count"],
         "input_tokens": output["input_tokens"],
