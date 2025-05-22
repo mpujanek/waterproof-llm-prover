@@ -2,7 +2,7 @@ import json
 import os
 from datetime import datetime
 
-def export_json(model, exercise, exercises, prompt, tutorial, output, proof_result, folder_path, line_with_error):
+def export_json(model, exercise, exercises, prompt, tutorial, output, proof_errors, folder_path, line_with_error):
     # Prepare data
     data = {
         "model": model,
@@ -16,8 +16,9 @@ def export_json(model, exercise, exercises, prompt, tutorial, output, proof_resu
         "output_tokens": output["output_tokens"],
         "cost": output["cost"],
         "thinking_mode": output["thinking_mode"],
-        "compiles": proof_result,
-        "line_with_error": line_with_error
+        "errors": proof_errors,
+        "line_with_error": line_with_error,
+        "success": proof_errors == "" and line_with_error is None,
     }
 
     # Create file name

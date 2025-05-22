@@ -90,10 +90,10 @@ def run(models, exercise_numbers, prompt_filename, tutorial_filename):
             proof_attempt = clean(proof_attempt)
 
             # Compile response to check if proof is correct
-            proof_result, line_with_error = compile_output(proof_attempt, imports[exercise], exercises[exercise], exercise)
+            proof_errors, line_with_error = compile_output(proof_attempt, imports[exercise], exercises[exercise], exercise)
 
             # Export result to JSON
-            export_json(model, exercise, exercises, no_tutorial_prompt, tutorial, output, proof_result, folder_path, line_with_error)
+            export_json(model, exercise, exercises, no_tutorial_prompt, tutorial, output, proof_errors, folder_path, line_with_error)
 
 
 proof = """

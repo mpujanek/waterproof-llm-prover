@@ -32,17 +32,15 @@ def compile_output(proof, imports, exercise, exercise_number):
     print("STDERR:", result.stderr)
 
     # If there is an error, split text by lines and extract the line with the error
-    if result.stderr != "":
+    if result.stderr:
         lines = temp_full.splitlines()
         match = re.search(r'line (\d+)', result.stderr)
         if match:
             line_number = int(match.group(1))
-            if line_number:
-                print("Line with error:", lines[line_number - 1])
-            else:
-                print("No line number found.")
-        else:
-            print("No line number found.")
-        return result.stderr, lines[line_number - 1]
+            if 1 <= line_number <= len(lines):
+                return result.stderr, lines[line_number - 1]
+        # If no valid line number found
+        return result.stderr, None
 
-    return "yes", ""
+    # No error
+    return "", None
