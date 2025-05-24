@@ -1,19 +1,30 @@
 from exercise_parser import parse, clean
 from prompt_composer import compose
-from api_caller import call_api
+from openrouter_api_caller import call_api
 from proof_compiler import compile_output
 from json_exporter import export_json, make_folder
 
 ## STEP 1: Specify models to test
 
-# List of models to choose from (put chosen ones in "models" variable)
-supported_models = [
-    "o4-mini", "o3", "o3-mini", "o1", "o1-mini", "o1-pro",
-    "claude-3-7-sonnet", "claude-3-7-sonnet-thinking",
-    "gemini-2.5-flash-preview-04-17", "gemini-2.5-pro-preview-05-06"
-]
+# Below are given some example models you can use
+# You can also input any other model id from openrouter.ai
 
-models = ["gemini-2.5-flash-preview-04-17", "gemini-2.5-pro-preview-05-06", ]
+PRICING = {
+        "anthropic/claude-3.7-sonnet": {"input": 3.0, "output": 15.0},
+        "anthropic/claude-sonnet-4": {"input": 3.0, "output": 15.0},
+        "anthropic/claude-3.7-sonnet:thinking": {"input": 3.0, "output": 15.0},
+        "openai/o4-mini": {"input": 1.1, "output": 4.4},
+        "openai/o3": {"input": 10.0, "output": 40.0},
+        "openai/o3-mini": {"input": 1.1, "output": 4.4},
+        "openai/o1": {"input": 15.0, "output": 60.0},
+        "openai/o1-mini": {"input": 1.1, "output": 4.4},
+        "openai/o1-pro": {"input": 150.0, "output": 600.0},
+        "google/gemini-2.5-flash-preview-05-20": {"input": 0.15, "output": 0.60},
+        "google/gemini-2.5-flash-preview-05-20:thinking": {"input": 0.15, "output": 0.60},
+        "google/gemini-2.5-pro-preview": {"input": 1.25, "output": 10.0}
+}
+
+models = ["anthropic/claude-3.7-sonnet", "openai/o3-mini", "google/gemini-2.5-flash-preview-05-20"]
 
 
 ## STEP 2: Specify what exercises to test on
@@ -58,11 +69,6 @@ directory = "responses"
 ## Run tests
 
 def run(models, exercise_numbers, prompt_filename, tutorial_filename):
-    # Check that all chosen models are supported
-    for model in models:
-        if model not in supported_models:
-            print(f"Unsupported model specified: {model}")
-            return
 
     # Parse exercise sheets to extract desired exercises 
     # Returns dict with exercise numbers as keys and content as values

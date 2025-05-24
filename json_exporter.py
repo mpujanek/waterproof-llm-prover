@@ -23,7 +23,8 @@ def export_json(model, exercise, exercises, prompt, tutorial, output, proof_erro
 
     # Create file name
     exercise_name = exercise.replace("_", "-")
-    filename = f"{model}_{exercise_name}.json"
+    model_name = model.replace("/", "-")
+    filename = f"{model_name}_{exercise_name}.json"
     file_path = os.path.join(folder_path, filename)
 
     # Save to new file

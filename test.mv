@@ -1,0 +1,30 @@
+
+```coq
+Lemma exercise_3_11_2 :
+  ∀ x ∈ ℝ,
+    ∃ y ∈ ℝ,
+      ∀ u > 0,
+          ∃ v > 0, x + u < y + v.
+Proof.
+```
+<input-area>
+```coq
+Take x ∈ ℝ.
+We need to show that (∃ y ∈ ℝ, ∀ u > 0, ∃ v > 0, x + u < y + v).
+Choose y := (x + 1).
+* Indeed, (y ∈ ℝ).
+* We need to show that (∀ u > 0, ∃ v > 0, x + u < y + v).
+  Take u > 0.
+  We need to show that (∃ v > 0, x + u < y + v).
+  Choose v := (u + 1).
+  - Indeed, (v > 0).
+  - We need to show that (x + u < y + v).
+    It holds that (y = x + 1).
+    It holds that (y + v = (x + 1) + (u + 1)).
+    It holds that (y + v = x + u + 2).
+    We conclude that (x + u < y + v).
+```
+</input-area>
+```coq
+Qed.
+```
