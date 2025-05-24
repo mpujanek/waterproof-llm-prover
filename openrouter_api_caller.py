@@ -10,18 +10,25 @@ client = OpenAI(
 )
 
 PRICING = {
-        "anthropic/claude-3.7-sonnet": {"input": 3.0, "output": 15.0},
-        "anthropic/claude-sonnet-4": {"input": 3.0, "output": 15.0},
-        "anthropic/claude-3.7-sonnet:thinking": {"input": 3.0, "output": 15.0},
-        "openai/o4-mini": {"input": 1.1, "output": 4.4},
-        "openai/o3": {"input": 10.0, "output": 40.0},
-        "openai/o3-mini": {"input": 1.1, "output": 4.4},
-        "openai/o1": {"input": 15.0, "output": 60.0},
-        "openai/o1-mini": {"input": 1.1, "output": 4.4},
-        "openai/o1-pro": {"input": 150.0, "output": 600.0},
-        "google/gemini-2.5-flash-preview-05-20": {"input": 0.15, "output": 0.60},
-        "google/gemini-2.5-flash-preview-05-20:thinking": {"input": 0.15, "output": 0.60},
-        "google/gemini-2.5-pro-preview": {"input": 1.25, "output": 10.0}
+        "anthropic/claude-3.7-sonnet": {"input": 3.0, "output": 15.0, "thinking": False},
+        "anthropic/claude-sonnet-4": {"input": 3.0, "output": 15.0, "thinking": False},
+        "anthropic/claude-3.7-sonnet:thinking": {"input": 3.0, "output": 15.0, "thinking": True},
+        "openai/o4-mini": {"input": 1.1, "output": 4.4, "thinking": True},
+        "openai/o3-mini": {"input": 1.1, "output": 4.4, "thinking": True},
+        "openai/o1-mini": {"input": 1.1, "output": 4.4, "thinking": True},
+        "google/gemini-2.5-flash-preview-05-20": {"input": 0.15, "output": 0.60, "thinking": False},
+        "google/gemini-2.5-flash-preview-05-20:thinking": {"input": 0.15, "output": 0.60, "thinking": True},
+        "deepseek/deepseek-prover-v2:free": {"input": 0.5, "output": 2.18, "thinking": False},
+        "deepseek/deepseek-chat-v3-0324:free": {"input": 0.3, "output": 0.88, "thinking": False},
+        "deepseek/deepseek-r1:free": {"input": 0.5, "output": 2.18, "thinking": True},
+        "meta-llama/llama-3.3-70b-instruct": {"input": 0.07, "output": 0.25, "thinking": False},
+        "nousresearch/hermes-3-llama-3.1-405b": {"input": 0.70, "output": 0.80, "thinking": False},
+        "nousresearch/hermes-3-llama-3.1-70b": {"input": 0.12, "output": 0.30, "thinking": False},
+        "meta-llama/llama-4-maverick": {"input": 0.16, "output": 0.60, "thinking": False},
+        "qwen/qwen3-235b-a22b": {"input": 0.14, "output": 0.60, "thinking": True},
+        "qwen/qwq-32b:free": {"input": 0.15, "output": 0.20, "thinking": True},
+        "qwen/qwen-2.5-72b-instruct": {"input": 0.12, "output": 0.39, "thinking": False},
+        "x-ai/grok-3-mini-beta": {"input": 0.30, "output": 0.50, "thinking": True},
 }
 
 
@@ -35,7 +42,7 @@ def call_api(model, input):
                 "role": "user",
                 "content": input
             }
-        ]
+        ],
     )
 
     prompt_tokens = completion.usage.prompt_tokens
@@ -48,7 +55,7 @@ def call_api(model, input):
     output["output_tokens"] = completion_tokens
     output["token_count"] = prompt_tokens + completion_tokens
     output["cost"] = estimate_cost(model, prompt_tokens, completion_tokens)
-    output["thinking_mode"] = True
+    output["thinking_mode"] = PRICING.get(model).get("thinking")
 
     print(response_text)
     print(output)
