@@ -9,6 +9,9 @@ To help you out, here are some mistakes which commonly appear in Waterproof proo
 This is true even if the original expression already contains a negation, resulting in ¬¬(expr).
 - Use "Choose" to prove "there exists" statements, and "Take" to prove "for all" statements. 
 - If you are operating in the realm of natural numbers, please remember to use "%nat" as shown in the tutorial. 
+- If using chains of inequalities, make sure to use the ampersand syntax, i.e. (& x < y < z), as shown in the tutorial.
+- If the error message has something to do with focused goals, make sure to vary the symbols you use for focused goal indentation.
+For example, if you've used an asterisk (*) at one level of indentation, use a different symbol, like a hyphen (-), for the next.
 
 Finally, please recall that your revised answer should abide by the same rules as outlined earlier. 
 Specifically, it should begin with "Proof." and end with "Qed.". 
