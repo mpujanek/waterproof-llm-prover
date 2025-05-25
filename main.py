@@ -10,7 +10,9 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 # Some example models you can use are given in PRICING
 # You can also input any other model id from openrouter.ai
 
-models = [model for model in PRICING]
+models = ["deepseek/deepseek-prover-v2:free",
+    "deepseek/deepseek-chat-v3-0324:free",
+    "deepseek/deepseek-r1:free"]
 
 ## STEP 2: Specify what exercises to test on
 # Input a list of strings of the format "3_11_2" where 3 is the chapter name,

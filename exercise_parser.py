@@ -1,4 +1,4 @@
-
+import re
 
 # Returns dict with exercise numbers as keys and content as values
 def parse(exercise_numbers):
@@ -29,15 +29,26 @@ def parse(exercise_numbers):
 
     return exercises, imports
 
-def clean(exercise):
-    lines = exercise.strip().splitlines()
+def clean(text):
+    # Remove surrounding backticks or code fences
+    text = text.strip().strip("`")
 
-    # Remove starting 'Proof.' if present
-    if lines and lines[0].strip() == "Proof.":
-        lines = lines[1:]
+    # Find positions of first 'Proof.' and last 'Qed.'
+    proof_start = text.find("Proof.")
+    qed_end = text.rfind("Qed.")
 
-    # Remove ending 'Qed.' if present
-    if lines and lines[-1].strip() == "Qed.":
-        lines = lines[:-1]
+    if proof_start == -1:
+        start = 0
+    else:
+        start = proof_start + len("Proof.")
 
-    return "\n".join(lines).strip()
+    if qed_end == -1:
+        end = len(text)
+    else:
+        end = qed_end
+
+    cleaned = text[start:end].strip()
+
+    # Normalize line endings and remove empty lines
+    lines = [line.strip() for line in cleaned.splitlines() if line.strip()]
+    return "\n".join(lines)

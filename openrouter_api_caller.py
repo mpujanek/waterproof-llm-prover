@@ -1,5 +1,6 @@
 from openai import OpenAI
 from dotenv import load_dotenv
+import tiktoken
 import os
 
 load_dotenv()
@@ -31,6 +32,26 @@ PRICING = {
         "meta-llama/llama-4-maverick": {"input": 0.16, "output": 0.60, "thinking": False},
 }
 
+# Map OpenRouter models to closest known OpenAI tokenizer
+TOKENIZER_MAP = {
+    "openai/o4-mini": "gpt-4",
+    "openai/o3-mini": "gpt-4",
+    "openai/o1-mini": "gpt-4",
+    "anthropic/claude-3.7-sonnet": "gpt-4",
+    "anthropic/claude-sonnet-4": "gpt-4",
+    "deepseek/deepseek-prover-v2:free": "gpt-3.5-turbo",
+    "deepseek/deepseek-chat-v3-0324:free": "gpt-3.5-turbo",
+    "deepseek/deepseek-r1:free": "gpt-3.5-turbo",
+    "meta-llama/llama-3.3-70b-instruct": "cl100k_base",
+    "meta-llama/llama-4-maverick": "cl100k_base",
+    "x-ai/grok-3-mini-beta": "cl100k_base",
+    "qwen/qwen3-235b-a22b": "cl100k_base",
+    "qwen/qwen-2.5-72b-instruct": "cl100k_base",
+    "google/gemini-2.5-flash-preview-05-20": "gpt-3.5-turbo",
+    "nousresearch/hermes-3-llama-3.1-70b": "cl100k_base",
+    "nousresearch/hermes-3-llama-3.1-405b": "cl100k_base",
+}
+
 
 def call_api(model, input):
     output = {}
@@ -45,20 +66,24 @@ def call_api(model, input):
         ],
     )
 
-    prompt_tokens = completion.usage.prompt_tokens
-    completion_tokens = completion.usage.completion_tokens
-
     response_text = completion.choices[0].message.content
+
+    prompt_tokens = completion.usage.prompt_tokens
+    completion_tokens = completion.usage.completion_tokens # includes thinking + response
+    output_tokens = count_tokens(response_text, model)
+    thinking_tokens = completion_tokens - output_tokens
 
     output["output"] = response_text
     output["input_tokens"] = prompt_tokens
-    output["output_tokens"] = completion_tokens
-    output["token_count"] = prompt_tokens + completion_tokens
+    output["thinking_tokens"] = thinking_tokens
+    output["output_tokens"] = output_tokens
+    output["token_count"] = prompt_tokens + thinking_tokens + output_tokens
     output["cost"] = estimate_cost(model, prompt_tokens, completion_tokens)
     output["thinking_mode"] = PRICING.get(model).get("thinking")
 
     print(response_text)
     print(output)
+    print(completion_tokens)
 
     return output
 
@@ -71,3 +96,13 @@ def estimate_cost(model_name, input_tokens, output_tokens):
     output_cost = (output_tokens / 1000000) * model_price["output"]
     
     return input_cost + output_cost
+
+def count_tokens(text, model_name):
+    tokenizer_name = TOKENIZER_MAP.get(model_name, "cl100k_base")
+    try:
+        enc = tiktoken.encoding_for_model(tokenizer_name)
+    except KeyError:
+        enc = tiktoken.get_encoding("cl100k_base")
+    return len(enc.encode(text))
+
+call_api("google/gemini-2.5-flash-preview-05-20:thinking", "what is the integral from 4 to 100 of x^2?")
