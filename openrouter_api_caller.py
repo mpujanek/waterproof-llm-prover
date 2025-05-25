@@ -63,8 +63,6 @@ def call_api(model, input):
     return output
 
 def estimate_cost(model_name, input_tokens, output_tokens):
-    # Pricing in USD per 1M tokens (as of early 2025, change if outdated)
-    
     model_price = PRICING.get(model_name)
     if not model_price:
         return None
