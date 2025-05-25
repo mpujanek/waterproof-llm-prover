@@ -55,18 +55,19 @@ TOKENIZER_MAP = {
 }
 
 
-def call_api(model, input):
-    output = {}
+def call_api(model, history):
 
     completion = client.chat.completions.create(
         model=model,
-        messages=[
-            {
-                "role": "user",
-                "content": input
-            }
-        ],
+        messages=history,
     )
+
+    output = extract_data(completion, model)
+
+    return output
+
+def extract_data(completion, model):
+    output = {}
 
     response_text = completion.choices[0].message.content # does not include thinking
 

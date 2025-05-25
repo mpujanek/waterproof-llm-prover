@@ -74,6 +74,7 @@ def run(models, exercise_numbers, prompt_filename, tutorial_filename, revision_f
         # For keeping track of errors between iterations
         proof_errors = None
         line_with_error = None
+        conversation_history = []
 
         for attempt in range(1, max_attempts + 1):
 
@@ -84,8 +85,13 @@ def run(models, exercise_numbers, prompt_filename, tutorial_filename, revision_f
                 # Use revision prompt instead if model is revising
                 input = compose_revision(revision_filename, proof_errors, line_with_error)
 
+            conversation_history.append({"role": "user", "content": input})
+
             # Call API of given model with input
-            output = call_api(model, input)
+            output = call_api(model, conversation_history)
+
+            # Append model's response to conversation history
+            conversation_history.append({"role": "assistant", "content": output["output"]})
 
             # Extract and clean the LLM's proof attempt before compiling (compile only between "Proof." and "Qed.")
             proof_attempt = clean(output["output"])
@@ -105,6 +111,7 @@ def run(models, exercise_numbers, prompt_filename, tutorial_filename, revision_f
                 exercises,
                 no_tutorial_prompt,
                 tutorial,
+                input,
                 output,
                 proof_errors,
                 folder_path,
@@ -114,6 +121,9 @@ def run(models, exercise_numbers, prompt_filename, tutorial_filename, revision_f
                 attempt,
                 max_attempts
             )
+
+            if proof_errors == "":
+                break
 
     # Run each model on each exercise concurrently
     futures = []
@@ -129,34 +139,5 @@ def run(models, exercise_numbers, prompt_filename, tutorial_filename, revision_f
             except Exception as e:
                 print("Error during API run:", e)
 
-
-proof = """
-Take x ∈ ℝ.
-We need to show that (∃ y ∈ ℝ, ∀ u > 0, ∃ v > 0, x + u < y + v).
-Choose y := (x).
-* Indeed, (y ∈ ℝ).
-* We need to show that (∀ u > 0, ∃ v > 0, x + u < y + v).
-  Take u > 0.
-  We need to show that (∃ v > 0, x + u < y + v).
-  Choose v := (u + 1).
-  - Indeed, (v > 0).
-  - We need to show that (x + u < y + v).
-    It holds that (y = x).
-    It holds that (v = u + 1).
-    It holds that (y + v = x + (u + 1)).
-    It holds that (x + u < x + u + 1).
-    We conclude that (x + u < y + v).
-"""
-with open("exercises/imports/E3_11_2.v", "r") as file:
-            imports = file.read()
-with open("exercises/E3_11_2.v", "r") as file:
-            exercise = file.read()
-
-#print(compile_output(proof, imports, exercise) == "")
-
-#print(parse(exercise_numbers))
-
-#a, b = compose(prompt_filename, tutorial_filename)
-#print(b)
 
 run(models, exercise_numbers, prompt_filename, tutorial_filename, revision_filename, 2, 3)

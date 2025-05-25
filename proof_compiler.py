@@ -40,7 +40,7 @@ def compile_output(proof, imports, exercise, exercise_number):
             if 1 <= line_number <= len(lines):
                 return result.stderr, lines[line_number - 1]
         # If no valid line number found
-        return result.stderr, None
+        return result.stderr, "Line not specified."
 
     # No error
     return "", None
