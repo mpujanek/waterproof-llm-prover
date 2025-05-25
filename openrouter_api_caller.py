@@ -111,5 +111,3 @@ def count_tokens(text, model_name):
     except KeyError:
         enc = tiktoken.get_encoding("cl100k_base")
     return len(enc.encode(text))
-
-call_api("google/gemini-2.5-flash-preview-05-20:thinking", "what is the integral from 4 to 100 of x^2?")
