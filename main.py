@@ -1,5 +1,5 @@
 from exercise_parser import parse, clean
-from prompt_composer import compose
+from prompt_composer import compose, compose_revision
 from openrouter_api_caller import call_api, PRICING
 from proof_compiler import compile_output
 from json_exporter import export_json, make_folder
@@ -10,9 +10,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 # Some example models you can use are given in PRICING
 # You can also input any other model id from openrouter.ai
 
-models = ["deepseek/deepseek-prover-v2:free",
-    "deepseek/deepseek-chat-v3-0324:free",
-    "deepseek/deepseek-r1:free"]
+models = ["x-ai/grok-3-mini-beta", "openai/o4-mini"]
 
 ## STEP 2: Specify what exercises to test on
 # Input a list of strings of the format "3_11_2" where 3 is the chapter name,
@@ -35,7 +33,7 @@ all_exercises = [
     "13_11_2", "13_11_3"
 ]
 
-exercise_numbers = ["6_8_1"]
+exercise_numbers = ["11_not_closed"]
 
 
 ## STEP 3: Specify prompt and provide a syntax tutorial
@@ -44,6 +42,7 @@ exercise_numbers = ["6_8_1"]
 
 prompt_filename = "generic_wp_prompt.txt"
 tutorial_filename = "tutorial.txt"
+revision_filename = "revision_prompt.txt"
 
 
 ## STEP 3: Specify folder to store results
@@ -52,47 +51,11 @@ tutorial_filename = "tutorial.txt"
 
 directory = "responses"
 
-
 ## Run tests
 
-def run1(models, exercise_numbers, prompt_filename, tutorial_filename):
+def run(models, exercise_numbers, prompt_filename, tutorial_filename, revision_filename, runs=1, max_attempts=1):
 
-    # Parse exercise sheets to extract desired exercises 
-    # Returns dict with exercise numbers as keys and content as values
-    exercises, imports = parse(exercise_numbers)
-
-    # Compose prompt from given files
-    no_tutorial_prompt, prompt, tutorial = compose(prompt_filename, tutorial_filename)
-
-    # Make a folder in the specified directory for storing results of this run
-    folder_path = make_folder(directory)
-
-    # Run all models on all exercises, export output
-    for exercise in exercises:
-        # Concatenate exercise to the prompt
-        input = prompt + "\n" + exercises[exercise]
-
-        for model in models:
-            # Call APIs of given model with input
-            output = call_api(model, input)
-
-            # Extract the LLM's proof attempt
-            proof_attempt = output["output"]
-
-            # Clean output before compiling (remove leading/trailing "Proof."/"Qed.")
-            proof_attempt = clean(proof_attempt)
-
-            # Compile response to check if proof is correct
-            proof_errors, line_with_error = compile_output(proof_attempt, imports[exercise], exercises[exercise], exercise)
-
-            # Export result to JSON
-            export_json(model, exercise, exercises, no_tutorial_prompt, tutorial, output, proof_errors, folder_path, line_with_error)
-
-## Run tests
-
-def run(models, exercise_numbers, prompt_filename, tutorial_filename):
-
-    # Parse exercise sheets to extract desired exercises 
+    # Parse exercise sheets to extract desired exercises
     # Returns dict with exercise numbers as keys and content as values
     exercises, imports = parse(exercise_numbers)
 
@@ -103,43 +66,62 @@ def run(models, exercise_numbers, prompt_filename, tutorial_filename):
     folder_path = make_folder(directory)
 
     # Define the task of running a model on an exercise; these will be run concurrently
-    def task(model, exercise_key):
-        # Concatenate exercise to the prompt
-        input = prompt + "\n" + exercises[exercise_key]
+    def task(model, exercise_key, run_index, max_attempts):
 
-        # Call API of given model with input
-        output = call_api(model, input)
+        # In case of multiple runs per model
+        run_id = f"{model}::{exercise_key}::{run_index}"
 
-        # Extract and clean the LLM's proof attempt before compiling (remove leading/trailing "Proof."/"Qed.")
-        proof_attempt = clean(output["output"])
+        # For keeping track of errors between iterations
+        proof_errors = None
+        line_with_error = None
 
-        # Compile response to check if proof is correct
-        proof_errors, line_with_error = compile_output(
-            proof_attempt,
-            imports[exercise_key],
-            exercises[exercise_key],
-            exercise_key
-        )
+        for attempt in range(1, max_attempts + 1):
 
-        # Export result to JSON
-        export_json(
-            model,
-            exercise_key,
-            exercises,
-            no_tutorial_prompt,
-            tutorial,
-            output,
-            proof_errors,
-            folder_path,
-            line_with_error
-        )
+            if attempt == 1:
+                # Concatenate exercise to the prompt
+                input = prompt + "\n" + exercises[exercise_key]
+            else: 
+                # Use revision prompt instead if model is revising
+                input = compose_revision(revision_filename, proof_errors, line_with_error)
+
+            # Call API of given model with input
+            output = call_api(model, input)
+
+            # Extract and clean the LLM's proof attempt before compiling (compile only between "Proof." and "Qed.")
+            proof_attempt = clean(output["output"])
+
+            # Compile response to check if proof is correct
+            proof_errors, line_with_error = compile_output(
+                proof_attempt,
+                imports[exercise_key],
+                exercises[exercise_key],
+                exercise_key
+            )
+
+            # Export result to JSON
+            export_json(
+                model,
+                exercise_key,
+                exercises,
+                no_tutorial_prompt,
+                tutorial,
+                output,
+                proof_errors,
+                folder_path,
+                line_with_error,
+                run_index,
+                run_id,
+                attempt,
+                max_attempts
+            )
 
     # Run each model on each exercise concurrently
     futures = []
     with ThreadPoolExecutor(max_workers=8) as executor:
         for exercise_key in exercises:
             for model in models:
-                futures.append(executor.submit(task, model, exercise_key))
+                for run_index in range(1, runs + 1):
+                    futures.append(executor.submit(task, model, exercise_key, run_index, max_attempts))
 
         for future in as_completed(futures):
             try:
@@ -177,4 +159,4 @@ with open("exercises/E3_11_2.v", "r") as file:
 #a, b = compose(prompt_filename, tutorial_filename)
 #print(b)
 
-run(models, exercise_numbers, prompt_filename, tutorial_filename)
+run(models, exercise_numbers, prompt_filename, tutorial_filename, revision_filename, 2, 3)

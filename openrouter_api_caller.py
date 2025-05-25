@@ -38,6 +38,7 @@ TOKENIZER_MAP = {
     "openai/o3-mini": "gpt-4",
     "openai/o1-mini": "gpt-4",
     "anthropic/claude-3.7-sonnet": "gpt-4",
+    "anthropic/claude-3.7-sonnet:thinking": "gpt-4",
     "anthropic/claude-sonnet-4": "gpt-4",
     "deepseek/deepseek-prover-v2:free": "gpt-3.5-turbo",
     "deepseek/deepseek-chat-v3-0324:free": "gpt-3.5-turbo",
@@ -48,6 +49,7 @@ TOKENIZER_MAP = {
     "qwen/qwen3-235b-a22b": "cl100k_base",
     "qwen/qwen-2.5-72b-instruct": "cl100k_base",
     "google/gemini-2.5-flash-preview-05-20": "gpt-3.5-turbo",
+    "google/gemini-2.5-flash-preview-05-20:thinking": "gpt-3.5-turbo",
     "nousresearch/hermes-3-llama-3.1-70b": "cl100k_base",
     "nousresearch/hermes-3-llama-3.1-405b": "cl100k_base",
 }
@@ -66,18 +68,23 @@ def call_api(model, input):
         ],
     )
 
-    response_text = completion.choices[0].message.content
+    response_text = completion.choices[0].message.content # does not include thinking
 
     prompt_tokens = completion.usage.prompt_tokens
     completion_tokens = completion.usage.completion_tokens # includes thinking + response
-    output_tokens = count_tokens(response_text, model)
-    thinking_tokens = completion_tokens - output_tokens
 
-    output["output"] = response_text
+    if PRICING.get(model).get("thinking"):
+        output_tokens = count_tokens(response_text, model)
+        thinking_tokens = completion_tokens - output_tokens
+        output["thinking_tokens"] = thinking_tokens
+        output["output_tokens"] = output_tokens
+    else: 
+        output["thinking_tokens"] = 0
+        output["output_tokens"] = completion_tokens
+
     output["input_tokens"] = prompt_tokens
-    output["thinking_tokens"] = thinking_tokens
-    output["output_tokens"] = output_tokens
-    output["token_count"] = prompt_tokens + thinking_tokens + output_tokens
+    output["output"] = response_text
+    output["token_count"] = output["input_tokens"] + output["thinking_tokens"] + output["output_tokens"]
     output["cost"] = estimate_cost(model, prompt_tokens, completion_tokens)
     output["thinking_mode"] = PRICING.get(model).get("thinking")
 
