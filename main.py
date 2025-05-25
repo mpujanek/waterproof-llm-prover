@@ -3,13 +3,14 @@ from prompt_composer import compose
 from openrouter_api_caller import call_api, PRICING
 from proof_compiler import compile_output
 from json_exporter import export_json, make_folder
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 ## STEP 1: Specify models to test
 
 # Some example models you can use are given in PRICING
 # You can also input any other model id from openrouter.ai
 
-models = ["x-ai/grok-3-mini-beta", "openai/o4-mini"]
+models = [model for model in PRICING]
 
 ## STEP 2: Specify what exercises to test on
 # Input a list of strings of the format "3_11_2" where 3 is the chapter name,
@@ -32,7 +33,7 @@ all_exercises = [
     "13_11_2", "13_11_3"
 ]
 
-exercise_numbers = ["10_7_intermediate"]
+exercise_numbers = ["6_8_1"]
 
 
 ## STEP 3: Specify prompt and provide a syntax tutorial
@@ -52,7 +53,7 @@ directory = "responses"
 
 ## Run tests
 
-def run(models, exercise_numbers, prompt_filename, tutorial_filename):
+def run1(models, exercise_numbers, prompt_filename, tutorial_filename):
 
     # Parse exercise sheets to extract desired exercises 
     # Returns dict with exercise numbers as keys and content as values
@@ -84,6 +85,65 @@ def run(models, exercise_numbers, prompt_filename, tutorial_filename):
 
             # Export result to JSON
             export_json(model, exercise, exercises, no_tutorial_prompt, tutorial, output, proof_errors, folder_path, line_with_error)
+
+## Run tests
+
+def run(models, exercise_numbers, prompt_filename, tutorial_filename):
+
+    # Parse exercise sheets to extract desired exercises 
+    # Returns dict with exercise numbers as keys and content as values
+    exercises, imports = parse(exercise_numbers)
+
+    # Compose prompt from given files
+    no_tutorial_prompt, prompt, tutorial = compose(prompt_filename, tutorial_filename)
+
+    # Make a folder in the specified directory for storing results of this run
+    folder_path = make_folder(directory)
+
+    # Define the task of running a model on an exercise; these will be run concurrently
+    def task(model, exercise_key):
+        # Concatenate exercise to the prompt
+        input = prompt + "\n" + exercises[exercise_key]
+
+        # Call API of given model with input
+        output = call_api(model, input)
+
+        # Extract and clean the LLM's proof attempt before compiling (remove leading/trailing "Proof."/"Qed.")
+        proof_attempt = clean(output["output"])
+
+        # Compile response to check if proof is correct
+        proof_errors, line_with_error = compile_output(
+            proof_attempt,
+            imports[exercise_key],
+            exercises[exercise_key],
+            exercise_key
+        )
+
+        # Export result to JSON
+        export_json(
+            model,
+            exercise_key,
+            exercises,
+            no_tutorial_prompt,
+            tutorial,
+            output,
+            proof_errors,
+            folder_path,
+            line_with_error
+        )
+
+    # Run each model on each exercise concurrently
+    futures = []
+    with ThreadPoolExecutor(max_workers=8) as executor:
+        for exercise_key in exercises:
+            for model in models:
+                futures.append(executor.submit(task, model, exercise_key))
+
+        for future in as_completed(futures):
+            try:
+                future.result()  # Raises exception if any
+            except Exception as e:
+                print("Error during API run:", e)
 
 
 proof = """
