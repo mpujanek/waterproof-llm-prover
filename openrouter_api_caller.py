@@ -79,7 +79,7 @@ def extract_data(completion, model):
         thinking_tokens = completion_tokens - output_tokens
         output["thinking_tokens"] = thinking_tokens
         output["output_tokens"] = output_tokens
-    else: 
+    else:
         output["thinking_tokens"] = 0
         output["output_tokens"] = completion_tokens
 
