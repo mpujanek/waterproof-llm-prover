@@ -7,8 +7,9 @@ Be as meticulous as possible - if the lemma has multiple "for all" or "there exi
 It is always fine to recall what needs to be shown, hence it is better to add such a step than to omit one.
 VERY IMPORTANT: When using multiple levels of indentation for focusing goals, avoid repeating the same symbol for deeper levels. 
 For example, if you've used an asterisk (*) at one level, use a different symbol, like a hyphen (-), for the next.
-Below is the tutorial, followed by the lemma to be proven:
+Below is the tutorial:
 
 %tutorial%
 
 Your final output should be pure Waterproof code, starting with "Proof." and ending with "Qed.". Do not enclose it in a code block and do not use backticks, simple plaintext is best. 
+Below is the lemma to be proven: 
