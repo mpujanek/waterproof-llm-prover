@@ -14,6 +14,7 @@ def export_json(model, exercise, exercises, prompt, tutorial, full_input, output
         "output": output["output"],
         "token_count": output["token_count"],
         "input_tokens": output["input_tokens"],
+        "thinking_tokens": output["thinking_tokens"],
         "output_tokens": output["output_tokens"],
         "cost": output["cost"],
         "thinking_mode": output["thinking_mode"],
