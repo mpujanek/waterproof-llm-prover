@@ -30,8 +30,9 @@ no_tutorial_prompt, prompt, tutorial = compose(prompt_filename, tutorial_filenam
 
 defs = ["infimum", "supremum", "maximum", "upper bound", "converges to",
         "bounded", "bounded below", "bounded above", "diverges to ∞", "diverges to -∞",
-        "index sequence", "accumulation point", "subsequence", "closed", "open", "continuous"]
-definition = "infimum"
+        "index sequence", "subsequence", "closed", "open", "interior point", "continuous",
+        "accumulation point", "limit", "isolated point"]
+definition = "isolated point"
 
 # Define the target directory where you want to store the file
 output_dir = "expanded_definitions"
@@ -46,7 +47,7 @@ output_filename = f"{definition}.txt"
 output_path = os.path.join(output_dir, output_filename)
 
 for exercise_key in exercises:
-    if exercise_key == "4_9_1":
+    if exercise_key == "13_11_2":
         expanded_def = compile_output(
                         "",
                         imports[exercise_key],

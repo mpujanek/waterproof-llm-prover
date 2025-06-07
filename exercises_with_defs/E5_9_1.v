@@ -9,3 +9,4 @@ Definition a (n : ℕ) := p.
 
 Lemma exercise_5_9_1 : a _converges to_ p.
 Proof.
+Expand the definition of converges to.

@@ -1,0 +1,4 @@
+We need to show that (∀ y ∈ ℝ,
+                        (y is an _upper bound_ for A
+                         ∧ (∀ L ∈ ℝ, L is an _upper bound_ for A ⇨ y ≤ L))
+                        ∧ y ∈ A ⇨ y is the _maximum_ of A).

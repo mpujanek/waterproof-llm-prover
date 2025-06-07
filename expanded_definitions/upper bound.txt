@@ -1,0 +1,1 @@
+It holds that (∃ b ∈ ℝ, ∀ a ∈ A, a ≤ b).

@@ -1,0 +1,4 @@
+We need to show that (∀ a ∈ ℝ,
+                        a is an _accumulation point_
+                        ∧ _limit_ of f in a is f(a)
+                        ∨ a is an _isolated point_).

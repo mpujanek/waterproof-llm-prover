@@ -1,0 +1,4 @@
+We need to show that (∀ a ∈ ℝ,
+                        a is an _accumulation point_
+                        ∧ _limit_ of f in a is f(a)
+                        ∨ (∃ ε > 0, ∀ x ∈ ℝ, |x - a| = 0 ∨ ε ≤ |x - a|)).

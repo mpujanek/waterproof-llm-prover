@@ -1,0 +1,3 @@
+We need to show that (∀ y ∈ ℝ,
+                        y is the _supremum_ of A ∧ y ∈ A
+                        ⇨ y ∈ A ∧ y is an _upper bound_ for A).

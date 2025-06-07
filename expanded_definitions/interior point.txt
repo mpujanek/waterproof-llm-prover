@@ -1,0 +1,1 @@
+We need to show that (¬ (∀ a, [0, 1) a ⇨ ∃ r > 0, ∀ x ∈ B(a, r), x ∈ [0, 1))).

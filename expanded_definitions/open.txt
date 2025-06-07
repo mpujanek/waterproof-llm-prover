@@ -1,0 +1,3 @@
+We need to show that (¬ (∀ a,
+                           (ℝ\[0, 1)) a
+                           ⇨ a is an _interior point_ of ℝ\[0, 1))).

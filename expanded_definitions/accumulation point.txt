@@ -1,0 +1,4 @@
+We need to show that (∀ a ∈ ℝ,
+                        (∀ ε > 0, ∃ x ∈ ℝ, 0 < |x - a| < ε)
+                        ∧ _limit_ of f in a is f(a)
+                        ∨ a is an _isolated point_).

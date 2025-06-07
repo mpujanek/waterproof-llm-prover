@@ -1,0 +1,2 @@
+We need to show that ((∃ M > 0, ∀ n ∈ ℕ, |a(n)| ≤ M)
+                        ⇔ (∃ M ∈ ℝ, ∀ n ∈ ℕ, a(n) ≤ M) ∧ a is _bounded below_).

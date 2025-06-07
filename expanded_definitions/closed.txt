@@ -1,0 +1,1 @@
+We need to show that (¬ ℝ\[0, 1) is _open_).

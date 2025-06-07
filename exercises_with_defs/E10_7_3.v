@@ -46,3 +46,4 @@ We show both statements.
   It holds that (a converges to p).
   By prop_10_3_1 it suffices to show that
     (c ◦ n is a subsequence of a).
+Expand the definition of subsequence.

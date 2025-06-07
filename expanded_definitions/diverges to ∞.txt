@@ -1,0 +1,2 @@
+We need to show that ((∀ M ∈ ℝ, ∃ N1 ∈ ℕ, ∀ n ≥ N1, a(n) > M)
+                        ⇔ a_opp _diverges to -∞_).

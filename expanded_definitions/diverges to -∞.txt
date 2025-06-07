@@ -1,0 +1,2 @@
+We need to show that (a _diverges to ∞_
+                        ⇔ (∀ M ∈ ℝ, ∃ N1 ∈ ℕ, ∀ n ≥ N1, a_opp(n) < M)).

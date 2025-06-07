@@ -8,3 +8,4 @@ Lemma exercise_6_8_2 :
     ⇔
   a_opp _diverges to -∞_.
 Proof.
+Expand the definition of diverges to -∞.

@@ -1,0 +1,1 @@
+We need to show that (∀ k ∈ ℕ, n(k) < n(k + 1)).

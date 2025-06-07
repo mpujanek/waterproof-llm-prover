@@ -28,7 +28,7 @@ def compile_output(proof, imports, exercise, exercise_number):
     result = subprocess.run(["bash", "exercises/checkproof.sh", tmp_path], capture_output=True, text=True)
 
     # Access stdout and stderr (debug)
-    #print("STDOUT:", result.stdout)
+    print("STDOUT:", result.stdout)
     #print("STDERR:", result.stderr)
 
     def extract_first_expanded_definition(text):

@@ -1,0 +1,3 @@
+We need to show that (∃ m,
+                        m is an _index sequence_
+                        ∧ (∀ k ∈ ℕ, c(n(k)) = a(m(k)))).
