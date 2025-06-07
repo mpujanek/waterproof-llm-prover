@@ -1,2 +1,2 @@
-# bep-openai-testing
-Testing OpenAI API usage for applications in mathematics education (bachelor thesis).
+# Formal theorem proving in Waterproof using LLMs
+This is my bachelor thesis where I investigate how cutting-edge LLMs perform on formal proof writing using the Waterproof theorem prover.
