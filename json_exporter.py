@@ -38,16 +38,18 @@ def export_json(model, exercise, exercises, prompt, tutorial, full_input, output
 
     print(f"Finished running {model} on exercise {exercise}.")
 
-def make_folder(directory):
+def make_folder(directory, relative_to=None):
     # Get current date and time for folder name
     now = datetime.now()
     folder_name = now.strftime("%Y-%m-%d_%H-%M-%S")
 
-    # Make path for the new folder
-    base_path = os.path.join(os.getcwd(), directory)
+    if relative_to is None:
+        base_path = os.path.abspath(directory)
+    else:
+        base_path = os.path.abspath(os.path.join(relative_to, directory))
+
     folder_path = os.path.join(base_path, folder_name)
 
-    # Create the new folder
-    os.makedirs(folder_path)
+    os.makedirs(folder_path, exist_ok=True)
 
     return folder_path

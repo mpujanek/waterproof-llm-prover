@@ -53,7 +53,7 @@ directory = "responses"
 
 ## Run tests
 
-def run(models, exercise_numbers, prompt_filename, tutorial_filename, revision_filename, runs=1, max_attempts=1):
+def run(models, exercise_numbers, prompt_filename, tutorial_filename, revision_filename, directory, base_dir, runs=1, max_attempts=1):
 
     # Parse exercise sheets to extract desired exercises
     # Returns dict with exercise numbers as keys and content as values
@@ -63,7 +63,7 @@ def run(models, exercise_numbers, prompt_filename, tutorial_filename, revision_f
     no_tutorial_prompt, prompt, tutorial = compose(prompt_filename, tutorial_filename)
 
     # Make a folder in the specified directory for storing results of this run
-    folder_path = make_folder(directory)
+    folder_path = make_folder(directory, relative_to=base_dir)
 
     # Define the task of running a model on an exercise; these will be run concurrently
     def task(model, exercise_key, run_index, max_attempts):
@@ -140,4 +140,4 @@ def run(models, exercise_numbers, prompt_filename, tutorial_filename, revision_f
                 print("Error during API run:", e)
 
 
-run(models, exercise_numbers, prompt_filename, tutorial_filename, revision_filename, 2, 3)
+#run(models, exercise_numbers, prompt_filename, tutorial_filename, revision_filename, directory, 2, 3)
