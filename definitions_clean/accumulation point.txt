@@ -1,0 +1,3 @@
+(a is an _accumulation point_).
+⇔
+(∀ ε > 0, ∃ x ∈ ℝ, 0 < |x - a| < ε).

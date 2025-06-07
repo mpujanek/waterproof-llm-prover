@@ -1,0 +1,3 @@
+(s is the _supremum_ of [a,b)).
+⇔
+(s is a _upper bound_ for [a, b) ∧ (∀ l ∈ ℝ, l is a _upper bound_ for [a, b) ⇨ s ≤ l)).

@@ -1,0 +1,2 @@
+We need to show that ((∀ a ∈ [0, 4), a ≤ 4)
+                        ∧ (∀ L ∈ ℝ, (∀ a ∈ [0, 4), a ≤ L) ⇨ 4 ≤ L)).

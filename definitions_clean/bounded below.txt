@@ -1,0 +1,3 @@
+(a is _bounded below_).
+⇔
+(∃ m ∈ ℝ, ∀ n ∈ ℕ, m ≤ a(n)).

@@ -1,0 +1,3 @@
+(l is a _lower bound_ for [a, b)).
+⇔
+(∀ a0 ∈ [a, b), l ≤ a0).

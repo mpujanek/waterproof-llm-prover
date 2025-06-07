@@ -1,0 +1,3 @@
+(A is _closed_).
+⇔
+(ℝ\A is _open_).

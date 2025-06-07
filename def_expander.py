@@ -32,7 +32,7 @@ defs = ["infimum", "supremum", "maximum", "upper bound", "converges to",
         "bounded", "bounded below", "bounded above", "diverges to ∞", "diverges to -∞",
         "index sequence", "subsequence", "closed", "open", "interior point", "continuous",
         "accumulation point", "limit", "isolated point"]
-definition = "isolated point"
+definition = "asd"
 
 # Define the target directory where you want to store the file
 output_dir = "expanded_definitions"
@@ -47,7 +47,7 @@ output_filename = f"{definition}.txt"
 output_path = os.path.join(output_dir, output_filename)
 
 for exercise_key in exercises:
-    if exercise_key == "13_11_2":
+    if exercise_key == "4_9_3":
         expanded_def = compile_output(
                         "",
                         imports[exercise_key],

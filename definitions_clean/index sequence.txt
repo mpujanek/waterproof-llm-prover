@@ -1,0 +1,3 @@
+(n is an _index sequence_).
+⇔
+(∀ k ∈ ℕ, n(k) < n(k + 1)).

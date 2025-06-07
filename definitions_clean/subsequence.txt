@@ -1,0 +1,5 @@
+(n is a _subsequence_ of a).
+⇔
+(∃ m,
+    m is an _index sequence_
+    ∧ (∀ k ∈ ℕ, n(k) = a(m(k)))).

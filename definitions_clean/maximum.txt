@@ -1,0 +1,3 @@
+(M is the _maximum_ of A).
+⇔
+((M ∈ A) ∧ (∀ a0 ∈ A, a0 ≤ M)).

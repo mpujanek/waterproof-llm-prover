@@ -1,0 +1,3 @@
+(a is an _interior point_ of A).
+⇔
+(∃ r > 0, ∀ x ∈ B(a, r), x ∈ A).

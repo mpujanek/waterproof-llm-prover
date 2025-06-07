@@ -1,0 +1,3 @@
+(a _converges to_ p).
+⇔
+(∀ ε > 0, ∃ N1 ∈ ℕ, ∀ n ≥ N1, dist(a(n), p) < ε).
