@@ -1,18 +1,18 @@
 import os
 from main import run
 
-models = ["openai/o4-mini", "openai/o3-mini"]
+models = ["openai/o4-mini"]
 
 exercise_numbers = ["5_9_1"]
 
-# provide list of generic definitions in prompt?
+# provide list of generic definitions in prompt? DONT FORGET TO CHANGE PROMPT FILENAME
 defs_no_context = True
 
 # expand all definitions in proof?
 defs_in_context = False
 
 # in this directory
-prompt_filename = "generic_wp_prompt.txt"
+prompt_filename = "generic_wp_prompt_with_defs.txt"
 tutorial_filename = "tutorial.txt"
 revision_filename = "revision_prompt.txt"
 
