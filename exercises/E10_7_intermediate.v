@@ -12,5 +12,4 @@ Open Scope nat_scope.
 Definition n (k : nat) := (2 * k).
 
 Lemma n_is_index_sequence : n is an _index sequence_.
-We need to show that (∀ k ∈ ℕ, n(k) < n(k + 1)).
 Proof.

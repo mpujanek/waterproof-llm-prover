@@ -7,4 +7,14 @@ Hypothesis A_nonempty : (∃ a ∈ ℝ, a ∈ A).
 Lemma ex_4_9_2 : ∀ y ∈ ℝ, (y is the _supremum_ of A) ∧ (y ∈ A) ⇒
   y is the _maximum_ of A.
 Proof.
-Expand the definition of maximum.
+We need to show that (∀ y ∈ ℝ,
+                        y is the _supremum_ of A ∧ y ∈ A
+                        ⇨ y ∈ A ∧ y is an _upper bound_ for A).
+We need to show that (∀ y ∈ ℝ,
+                        (y is an _upper bound_ for A
+                         ∧ (∀ L ∈ ℝ, L is an _upper bound_ for A ⇨ y ≤ L))
+                        ∧ y ∈ A ⇨ y ∈ A ∧ y is an _upper bound_ for A).
+We need to show that (∀ y ∈ ℝ,
+                        ((∀ a ∈ A, a ≤ y)
+                         ∧ (∀ L ∈ ℝ, (∀ a ∈ A, a ≤ L) ⇨ y ≤ L)) ∧ 
+                        y ∈ A ⇨ y ∈ A ∧ (∀ a ∈ A, a ≤ y)).

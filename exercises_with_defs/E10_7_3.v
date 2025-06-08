@@ -46,4 +46,9 @@ We show both statements.
   It holds that (a converges to p).
   By prop_10_3_1 it suffices to show that
     (c ◦ n is a subsequence of a).
-Expand the definition of subsequence.
+  We need to show that (∃ m,
+                        m is an _index sequence_
+                        ∧ (∀ k ∈ ℕ, c(n(k)) = a(m(k)))).
+  We need to show that (∃ m,
+                        (∀ k ∈ ℕ, m(k) < m(k + 1))
+                        ∧ (∀ k ∈ ℕ, c(n(k)) = a(m(k)))).

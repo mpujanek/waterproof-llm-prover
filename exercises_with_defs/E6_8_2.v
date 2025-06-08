@@ -8,4 +8,7 @@ Lemma exercise_6_8_2 :
     ⇔
   a_opp _diverges to -∞_.
 Proof.
-Expand the definition of diverges to -∞.
+We need to show that ((∀ M ∈ ℝ, ∃ N1 ∈ ℕ, ∀ n ≥ N1, a(n) > M)
+                        ⇔ a_opp _diverges to -∞_).
+We need to show that ((∀ M ∈ ℝ, ∃ N1 ∈ ℕ, ∀ n ≥ N1, a(n) > M)
+                        ⇔ (∀ M ∈ ℝ, ∃ N1 ∈ ℕ, ∀ n ≥ N1, a_opp(n) < M)).

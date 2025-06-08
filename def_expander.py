@@ -47,7 +47,7 @@ output_filename = f"{definition}.txt"
 output_path = os.path.join(output_dir, output_filename)
 
 for exercise_key in exercises:
-    if exercise_key == "4_9_3":
+    if exercise_key == "13_11_3":
         expanded_def = compile_output(
                         "",
                         imports[exercise_key],

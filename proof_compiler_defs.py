@@ -29,7 +29,7 @@ def compile_output(proof, imports, exercise, exercise_number):
 
     # Access stdout and stderr (debug)
     print("STDOUT:", result.stdout)
-    #print("STDERR:", result.stderr)
+    print("STDERR:", result.stderr)
 
     def extract_first_expanded_definition(text):
         # Match from "We need to show that" to the first period "."
