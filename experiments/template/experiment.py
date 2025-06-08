@@ -1,10 +1,15 @@
 import os
 from main import run
 
-models = ["openai/gpt-4.1", "openai/o4-mini",
-          "anthropic/claude-sonnet-4", "anthropic/claude-3.7-sonnet:thinking",
-          "google/gemini-2.5-flash-preview-05-20", "google/gemini-2.5-flash-preview-05-20:thinking",
-          "deepseek/deepseek-chat-v3-0324", "deepseek/deepseek-r1-0528"]
+models = {"openai/gpt-4.1": 1, 
+          "openai/o4-mini": 1,
+          "anthropic/claude-sonnet-4": 1, 
+          "anthropic/claude-3.7-sonnet:thinking": 1,
+          "google/gemini-2.5-flash-preview-05-20": 1, 
+          "google/gemini-2.5-flash-preview-05-20:thinking": 1,
+          "deepseek/deepseek-chat-v3-0324": 1, 
+          "deepseek/deepseek-r1-0528": 1
+          }
 
 exercise_numbers = ["10_7_6", "10_7_intermediate"]
 
@@ -25,4 +30,4 @@ directory = "results"
 runs = 1
 max_attempts = 1
 
-run(models, exercise_numbers, defs_no_context, defs_in_context, prompt_filename, tutorial_filename, revision_filename, directory, base_dir, runs, max_attempts)
+run(models, exercise_numbers, defs_no_context, defs_in_context, prompt_filename, tutorial_filename, revision_filename, directory, base_dir, runs)

@@ -53,10 +53,9 @@ directory = "responses"
 
 ## Run tests
 
-def run(models, exercise_numbers, defs_no_context, defs_in_context, prompt_filename, tutorial_filename, revision_filename, directory, base_dir, runs=1, max_attempts=1):
+def run(models_with_attempts, exercise_numbers, defs_no_context, defs_in_context, prompt_filename, tutorial_filename, revision_filename, directory, base_dir, runs=1):
 
     # Parse exercise sheets to extract desired exercises
-    # Returns dict with exercise numbers as keys and content as values
     exercises, imports = parse(exercise_numbers, defs_in_context)
 
     # Compose prompt from given files
@@ -66,37 +65,29 @@ def run(models, exercise_numbers, defs_no_context, defs_in_context, prompt_filen
     folder_path = make_folder(directory, relative_to=base_dir)
 
     # Define the task of running a model on an exercise; these will be run concurrently
-    def task(model, exercise_key, run_index, max_attempts):
+    def task(model, exercise_key, run_index, model_max_attempts):
 
-        # In case of multiple runs per model
         run_id = f"{model}::{exercise_key}::{run_index}"
 
-        # For keeping track of errors between iterations
         proof_errors = None
         line_with_error = None
         conversation_history = []
 
-        for attempt in range(1, max_attempts + 1):
+        for attempt in range(1, model_max_attempts + 1):
 
             if attempt == 1:
-                # Concatenate exercise to the prompt
                 input = prompt + "\n" + exercises[exercise_key]
-            else: 
-                # Use revision prompt instead if model is revising
+            else:
                 input = compose_revision(revision_filename, proof_errors, line_with_error)
 
             conversation_history.append({"role": "user", "content": input})
 
-            # Call API of given model with input
             output = call_api(model, conversation_history)
 
-            # Append model's response to conversation history
             conversation_history.append({"role": "assistant", "content": output["output"]})
 
-            # Extract and clean the LLM's proof attempt before compiling (compile only between "Proof." and "Qed.")
             proof_attempt = clean(output["output"])
 
-            # Compile response to check if proof is correct
             proof_errors, line_with_error = compile_output(
                 proof_attempt,
                 imports[exercise_key],
@@ -104,7 +95,6 @@ def run(models, exercise_numbers, defs_no_context, defs_in_context, prompt_filen
                 exercise_key
             )
 
-            # Export result to JSON
             export_json(
                 model,
                 exercise_key,
@@ -119,7 +109,7 @@ def run(models, exercise_numbers, defs_no_context, defs_in_context, prompt_filen
                 run_index,
                 run_id,
                 attempt,
-                max_attempts
+                model_max_attempts
             )
 
             if proof_errors == "":
@@ -129,13 +119,13 @@ def run(models, exercise_numbers, defs_no_context, defs_in_context, prompt_filen
     futures = []
     with ThreadPoolExecutor(max_workers=8) as executor:
         for exercise_key in exercises:
-            for model in models:
+            for model, model_max_attempts in models_with_attempts.items():
                 for run_index in range(1, runs + 1):
-                    futures.append(executor.submit(task, model, exercise_key, run_index, max_attempts))
+                    futures.append(executor.submit(task, model, exercise_key, run_index, model_max_attempts))
 
         for future in as_completed(futures):
             try:
-                future.result()  # Raises exception if any
+                future.result()
             except Exception as e:
                 print("Error during API run:", e)
 
