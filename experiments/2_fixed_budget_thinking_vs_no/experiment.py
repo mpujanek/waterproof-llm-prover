@@ -25,4 +25,5 @@ directory = "results"
 runs = 1
 max_attempts = 1
 
+# first run thinking models, one attempt each
 run(models, exercise_numbers, defs_no_context, defs_in_context, prompt_filename, tutorial_filename, revision_filename, directory, base_dir, runs, max_attempts)
