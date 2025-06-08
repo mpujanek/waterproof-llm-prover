@@ -11,5 +11,9 @@ Below is the tutorial:
 
 ***tutorial***
 
+For your convenience, here are the definitions you can use in constructing the proof:
+
+***definitions***
+
 Your final output should be pure Waterproof code, starting with "Proof." and ending with "Qed.". Do not enclose it in a code block and do not use backticks, simple plaintext is best. 
 Below is the lemma to be proven: 

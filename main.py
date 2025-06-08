@@ -53,14 +53,14 @@ directory = "responses"
 
 ## Run tests
 
-def run(models, exercise_numbers, prompt_filename, tutorial_filename, revision_filename, directory, base_dir, runs=1, max_attempts=1):
+def run(models, exercise_numbers, defs_no_context, defs_in_context, prompt_filename, tutorial_filename, revision_filename, directory, base_dir, runs=1, max_attempts=1):
 
     # Parse exercise sheets to extract desired exercises
     # Returns dict with exercise numbers as keys and content as values
-    exercises, imports = parse(exercise_numbers)
+    exercises, imports = parse(exercise_numbers, defs_in_context)
 
     # Compose prompt from given files
-    no_tutorial_prompt, prompt, tutorial = compose(prompt_filename, tutorial_filename)
+    no_tutorial_prompt, prompt, tutorial = compose(prompt_filename, tutorial_filename, defs_no_context)
 
     # Make a folder in the specified directory for storing results of this run
     folder_path = make_folder(directory, relative_to=base_dir)

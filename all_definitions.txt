@@ -1,0 +1,101 @@
+### Maximum of a set
+(M is the _maximum_ of A).
+⇔
+((M ∈ A) ∧ (∀ a0 ∈ A, a0 ≤ M)).
+
+### Upper bound for a set
+(l is a _upper bound_ for [a, b)).
+⇔
+(∀ a0 ∈ [a, b), a0 ≤ l).
+
+### Lower bound for a set
+(l is a _lower bound_ for [a, b)).
+⇔
+(∀ a0 ∈ [a, b), l ≤ a0).
+
+### Bounded above sequence
+(a is _bounded above_).
+⇔
+(∃ M ∈ ℝ, ∀ n ∈ ℕ, a(n) ≤ M).
+
+### Bounded below sequence
+(a is _bounded below_).
+⇔
+(∃ m ∈ ℝ, ∀ n ∈ ℕ, m ≤ a(n)).
+
+### Supremum of a set
+(s is the _supremum_ of [a,b)).
+⇔
+(s is a _upper bound_ for [a, b) ∧ (∀ l ∈ ℝ, l is a _upper bound_ for [a, b) ⇨ s ≤ l)).
+
+### Infimum of a set
+(s is the _infimum_ of [a,b)).
+⇔
+(s is a _lower bound_ for [a, b) ∧ (∀ l ∈ ℝ, l is a _lower bound_ for [a, b) ⇨ l ≤ s)).
+
+### Convergence of a sequence
+(a _converges to_ p).
+⇔
+(∀ ε > 0, ∃ N1 ∈ ℕ, ∀ n ≥ N1, dist(a(n), p) < ε).
+
+### Divergence of a sequence to positive infinity
+(a _diverges to ∞_).
+⇔
+(∀ M ∈ ℝ, ∃ N1 ∈ ℕ, ∀ n ≥ N1, a(n) > M).
+
+### Divergence of a sequence to negative infinity
+(a _diverges to -∞_).
+⇔
+(∀ M ∈ ℝ, ∃ N1 ∈ ℕ, ∀ n ≥ N1, a(n) < M).
+
+### Index sequence
+(n is an _index sequence_).
+⇔
+(∀ k ∈ ℕ, n(k) < n(k + 1)).
+
+### Subsequence 
+(n is a _subsequence_ of a).
+⇔
+(∃ m,
+    m is an _index sequence_
+    ∧ (∀ k ∈ ℕ, n(k) = a(m(k)))).
+
+### Accumulation point in a domain
+(a is an _accumulation point_).
+⇔
+(∀ ε > 0, ∃ x ∈ ℝ, 0 < |x - a| < ε).
+
+### Isolated point in a domain
+(a is an _isolated point_).
+⇔
+(∃ ε > 0, ∀ x ∈ ℝ, |x - a| = 0 ∨ ε ≤ |x - a|).
+
+### Limit of a function
+(_limit_ of f in a is f(a)).
+⇔
+(∀ ε > 0,
+   ∃ δ > 0,
+   ∀ x ∈ ℝ, 0 < |x - a| < δ ⇨ |f(x) - f(a)| < ε).
+
+### Continuous function
+(f is continuous).
+⇔
+(∀ a ∈ ℝ,
+    a is an _accumulation point_
+    ∧ _limit_ of f in a is f(a)
+    ∨ a is an _isolated point_).
+
+### Interior point of a set
+(a is an _interior point_ of A).
+⇔
+(∃ r > 0, ∀ x ∈ B(a, r), x ∈ A).
+
+### Open set 
+(A is _open_).
+⇔
+(a ∈ A ⇨ a is an _interior point_ of A).
+
+### Closed set 
+(A is _closed_).
+⇔
+(ℝ\A is _open_).

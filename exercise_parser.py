@@ -1,8 +1,13 @@
 import re
 
 # Returns dict with exercise numbers as keys and content as values
-def parse(exercise_numbers):
+def parse(exercise_numbers, defs_in_context):
     print("Parsing exercise sheets...")
+
+    if defs_in_context:
+        dir = "exercises_with_defs"
+    else:
+        dir = "exercises"
 
     exercises = {}
     imports = {}
@@ -10,17 +15,17 @@ def parse(exercise_numbers):
     # Initialize dict keys
     for exercise in exercise_numbers:
         # Get exercise content path and open it
-        exercise_path = f"./exercises/E{exercise}.v"
+        exercise_path = f"./{dir}/E{exercise}.v"
         with open(exercise_path, "r") as file:
             content = file.read()
 
         # Get exercise imports path and open it
-        imports_path = f"./exercises/imports/E{exercise}.v"
+        imports_path = f"./{dir}/imports/E{exercise}.v"
         with open(imports_path, "r") as file:
             exerciseimports = file.read()
 
         # Get all library imports
-        libimports_path = f"./exercises/libimports.v"
+        libimports_path = f"./{dir}/libimports.v"
         with open(libimports_path, "r") as file:
             libimports = file.read()
 
