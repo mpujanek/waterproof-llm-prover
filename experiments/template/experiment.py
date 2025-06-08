@@ -28,6 +28,5 @@ base_dir = os.path.dirname(os.path.abspath(__file__))
 directory = "results"
 
 runs = 1
-max_attempts = 1
 
 run(models, exercise_numbers, defs_no_context, defs_in_context, prompt_filename, tutorial_filename, revision_filename, directory, base_dir, runs)

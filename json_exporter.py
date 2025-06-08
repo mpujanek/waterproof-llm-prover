@@ -36,7 +36,7 @@ def export_json(model, exercise, exercises, prompt, tutorial, full_input, output
     with open(file_path, 'w') as f:
         json.dump(data, f, indent=4)
 
-    print(f"Finished running {model} on exercise {exercise}.")
+    print(f"Finished running {model} on exercise {exercise}, attempt {attempt} of {max_attempts}.")
 
 def make_folder(directory, relative_to=None):
     # Get current date and time for folder name
