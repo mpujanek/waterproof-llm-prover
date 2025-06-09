@@ -3,7 +3,6 @@ import os
 from datetime import datetime
 
 def export_json(model, exercise, exercises, prompt, tutorial, full_input, output, proof_errors, folder_path, line_with_error, run_index, run_id, attempt, max_attempts):
-    # Prepare data
     data = {
         "model": model,
         "exercise": exercise,
@@ -32,7 +31,6 @@ def export_json(model, exercise, exercises, prompt, tutorial, full_input, output
     filename = f"{model_name}_{exercise_name}_run-{run_index}_attempt-{attempt}.json"
     file_path = os.path.join(folder_path, filename)
 
-    # Save to new file
     with open(file_path, 'w') as f:
         json.dump(data, f, indent=4)
 

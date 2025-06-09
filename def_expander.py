@@ -40,7 +40,6 @@ output_dir = "expanded_definitions"
 # Ensure the directory exists
 os.makedirs(output_dir, exist_ok=True)
 
-# Define the filename (dynamic or fixed)
 output_filename = f"{definition}.txt"
 
 # Full path to the output file
@@ -54,6 +53,5 @@ for exercise_key in exercises:
                         exercises[exercise_key],
                         exercise_key
                     )
-        # Write to the file
         with open(output_path, 'w', encoding='utf-8') as f:
             f.write(expanded_def)
