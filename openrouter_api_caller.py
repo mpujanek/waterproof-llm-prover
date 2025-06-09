@@ -20,6 +20,7 @@ PRICING = {
         "deepseek/deepseek-r1-0528": {"input": 0.5, "output": 2.15, "thinking": True},
         "deepseek/deepseek-chat-v3-0324": {"input": 0.3, "output": 0.88, "thinking": False},
         "x-ai/grok-3-mini-beta": {"input": 0.30, "output": 0.50, "thinking": True},
+        "x-ai/grok-3-beta": {"input": 3.0, "output": 15.0, "thinking": False},
         "openai/o4-mini": {"input": 1.1, "output": 4.4, "thinking": True},
         "openai/o4-mini-high": {"input": 1.1, "output": 4.4, "thinking": True},
         "openai/o3-mini": {"input": 1.1, "output": 4.4, "thinking": True},
@@ -61,10 +62,17 @@ TOKENIZER_MAP = {
 
 def call_api(model, history):
 
-    completion = client.chat.completions.create(
-        model=model,
-        messages=history,
-    )
+    if model == "x-ai/grok-3-mini-beta":
+        completion = client.chat.completions.create(
+            model=model,
+            messages=history,
+            reasoning_effort="high"
+        )
+    else:
+        completion = client.chat.completions.create(
+            model=model,
+            messages=history,
+        )
 
     output = extract_data(completion, model)
 
