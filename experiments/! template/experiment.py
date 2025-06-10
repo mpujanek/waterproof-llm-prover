@@ -1,14 +1,16 @@
 import os
 from main import run
 
-models = {"openai/gpt-4.1": 1, 
-          "openai/o4-mini": 1,
-          "anthropic/claude-sonnet-4": 1, 
-          "anthropic/claude-3.7-sonnet:thinking": 1,
-          "google/gemini-2.5-flash-preview-05-20": 1, 
-          "google/gemini-2.5-flash-preview-05-20:thinking": 1,
-          "deepseek/deepseek-chat-v3-0324": 1, 
-          "deepseek/deepseek-r1-0528": 1
+models = {"openai/gpt-4.1": 0, 
+          "openai/o4-mini": 10,
+          "anthropic/claude-sonnet-4": 10, 
+          "anthropic/claude-3.7-sonnet:thinking": 0,
+          "google/gemini-2.5-flash-preview-05-20": 0, 
+          "google/gemini-2.5-flash-preview-05-20:thinking": 10,
+          "deepseek/deepseek-chat-v3-0324": 0, 
+          "deepseek/deepseek-r1-0528": 0,
+          "x-ai/grok-3-mini-beta": 10,
+          "x-ai/grok-3-beta": 10
           }
 
 exercise_numbers = ["10_7_6", "10_7_intermediate"]
