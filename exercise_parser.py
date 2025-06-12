@@ -38,8 +38,8 @@ def clean(text):
     # Remove surrounding backticks or code fences
     text = text.strip().strip("`")
 
-    # Find positions of first 'Proof.' and last 'Qed.'
-    proof_start = text.find("Proof.")
+    # Find positions of last 'Proof.' and last 'Qed.'
+    proof_start = text.rfind("Proof.")
     qed_end = text.rfind("Qed.")
 
     if proof_start == -1:

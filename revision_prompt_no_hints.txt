@@ -1,0 +1,9 @@
+Your proof seems to have some mistakes in it, as it does not compile correctly.
+Here is the error message: 
+
+***message***
+
+Please try to revise your proof based on the error message as well as your own reflection. 
+
+Finally, please recall that your revised answer should abide by the same rules as outlined earlier. 
+Specifically, it should begin with "Proof." and end with "Qed.". 

@@ -1,0 +1,5 @@
+You are asked to write a proof in the syntax of Waterproof, a theorem proving educational software. 
+You must strictly adhere to the syntax rules of the language. 
+The syntax resembles natural language, but it is parsed as rigorously as a programming language. 
+Your final output should be pure Waterproof code, starting with "Proof." and ending with "Qed.". Do not enclose it in a code block and do not use backticks, simple plaintext is best. 
+Below is the lemma to be proven: 

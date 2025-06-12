@@ -1,0 +1,19 @@
+You are asked to write a proof in the syntax of Waterproof, a theorem proving educational software. 
+You must strictly adhere to the syntax rules of the language. 
+All of the syntax rules that you need are contained in a tutorial below. 
+The syntax resembles natural language, but it is parsed as rigorously as a programming language. 
+Pay particular attention to parentheses, various types of indents such as with asterisks and hyphens, and do not take shortcuts or try to squeeze multiple statements into one line. 
+Be as meticulous as possible - if the lemma has multiple "for all" or "there exists" steps, add an updated "We need to show that..." line to the proof each time you address such a step. 
+It is always fine to recall what needs to be shown, hence it is better to add such a step than to omit one.
+VERY IMPORTANT: When using multiple levels of indentation for focusing goals, avoid repeating the same symbol for deeper levels. 
+For example, if you've used an asterisk (*) at one level, use a different symbol, like a hyphen (-), for the next.
+Below is the tutorial:
+
+***tutorial***
+
+Before you start writing the Waterproof proof itself, please start by interpreting (in natural language) what is the statement to be proven. 
+After that, write a natural language proof of your statement, which will serve as a draft for the Waterproof proof. 
+Then, to help think ahead, explain which tactics from the tutorial you plan to use in your Waterproof proof. 
+At the end of your output, you should provide your Waterproof proof.
+This should be pure Waterproof code, starting with "Proof." and ending with "Qed.". Do not enclose it in a code block and do not use backticks, simple plaintext is best. 
+Below is the lemma to be proven: 
