@@ -3,10 +3,11 @@ import tempfile
 import re
 
 def close_section(file_content: str) -> str:
-    match = re.search(r'^Section\s+([^\s.]+)\.', file_content, re.MULTILINE)
+    match = re.search(r'^(Section|Module)\s+([^\s.]+)\.', file_content, re.MULTILINE)
     if match:
-        section_name = match.group(1)
-        return f'\nEnd {section_name}.'
+        keyword = match.group(1)  # "Section" or "Module"
+        name = match.group(2)
+        return f'\nEnd {name}.'
     return ''
 
 def compile_output(proof, imports, exercise, exercise_number):

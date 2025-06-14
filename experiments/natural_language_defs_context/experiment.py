@@ -3,19 +3,17 @@ from main import run
 
 models = {"openai/gpt-4.1": 0, 
           "openai/o4-mini": 0,
-          "anthropic/claude-sonnet-4": 1, 
+          "anthropic/claude-sonnet-4": 10, 
           "anthropic/claude-3.7-sonnet:thinking": 0,
           "google/gemini-2.5-flash-preview-05-20": 0, 
-          "google/gemini-2.5-flash-preview-05-20:thinking": 1,
+          "google/gemini-2.5-flash-preview-05-20:thinking": 10,
           "deepseek/deepseek-chat-v3-0324": 0, 
           "deepseek/deepseek-r1-0528": 0,
           "x-ai/grok-3-mini-beta": 0,
           "x-ai/grok-3-beta": 0
           }
 
-exercise_numbers = ["13_11_2"]
-
-hard = [
+exercise_numbers = [
     "2_non_degenerate_1",
     "2_reflexive_1",
     "2_symmetric_1", "2_symmetric_2",
