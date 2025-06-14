@@ -6,6 +6,13 @@ Notation "'dist(' x , y )" := (dist X x y)
 
 Variables (a : ℕ → X) (k : ℕ) (p : X).
 
+(* To invoke metric space properties of the distance function on X, you have to write "By (dist_positive X), ..." or another property analogously *)
+Check (dist_positive X).
+Check (dist_non_degenerate X).
+Check (dist_symmetric X).
+Check (dist_triangle_inequality X).
+Check (dist_reflexive X).
+
 Definition a_shift (n : nat) := a (n + k)%nat.
 
 Lemma exercise_5_9_2 :

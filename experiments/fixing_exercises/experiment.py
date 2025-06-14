@@ -13,7 +13,7 @@ models = {"openai/gpt-4.1": 0,
           "x-ai/grok-3-beta": 0
           }
 
-exercise_numbers = ["2_non_degenerate_2"]
+exercise_numbers = ["5_9_2"]
 
 # provide list of generic definitions in prompt?
 defs_no_context = False
