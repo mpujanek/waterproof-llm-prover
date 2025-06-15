@@ -14,11 +14,13 @@ models = {"openai/gpt-4.1": 0,
           }
 
 exercise_numbers = [
-    "2_non_degenerate_1",
-    "2_reflexive_1",
-    "2_symmetric_1", "2_symmetric_2",
-    "2_triangle_inequality_1", "2_triangle_inequality_2",
-    "5_9_1", "5_9_2",
+    "2_triangle_inequality_2",
+    "5_9_2",
+]
+
+all_run = [
+    "2_triangle_inequality_2",
+    "5_9_2",
     "6_8_1", "6_8_2",
     "10_7_3",
     "10_7_6",
