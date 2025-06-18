@@ -15,10 +15,10 @@ models = {"openai/gpt-4.1": 0,
 
 exercise_numbers = [
     "2_non_degenerate_2",
-    "2_positive_2",
-    "2_reflexive_2",
-    "3_11_1", "3_11_2",
-    "10_7_intermediate",  
+    "2_positive_1", "2_positive_2",
+    "2_reflexive_1", "2_reflexive_2",
+    "3_11_1",
+    "10_7_intermediate",
 ]
 
 all_exercises = [
