@@ -27,7 +27,7 @@ all_exercises = [
 ]
 
 exercise_numbers = [
-    "11_not_closed"
+    "10_7_6"
 ]
 
 # provide list of generic definitions in prompt?

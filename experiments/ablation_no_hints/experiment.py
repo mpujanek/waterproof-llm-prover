@@ -1,7 +1,7 @@
 import os
 from main import run
 
-models = {"openai/gpt-4.1": 0, 
+models = {"openai/gpt-4.1": 50, 
           "openai/o4-mini": 0,
           "anthropic/claude-sonnet-4": 10, 
           "anthropic/claude-3.7-sonnet:thinking": 0,
