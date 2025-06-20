@@ -14,11 +14,7 @@ models = {"openai/gpt-4.1": 0,
           }
 
 exercise_numbers = [
-    "2_reflexive_1",
-    "2_symmetric_1", "2_symmetric_2",
-    "2_triangle_inequality_1",
-    "3_11_4",
-    "6_8_1", "6_8_2",
+    "6_8_1",
 ]
 
 # provide list of generic definitions in prompt?

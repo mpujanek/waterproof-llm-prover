@@ -6,19 +6,40 @@ models = {"openai/gpt-4.1": 50,
           "anthropic/claude-sonnet-4": 10, 
           "anthropic/claude-3.7-sonnet:thinking": 0,
           "google/gemini-2.5-flash-preview-05-20": 0, 
-          "google/gemini-2.5-flash-preview-05-20:thinking": 10,
+          "google/gemini-2.5-flash-preview-05-20:thinking": 50,
           "deepseek/deepseek-chat-v3-0324": 0, 
           "deepseek/deepseek-r1-0528": 0,
           "x-ai/grok-3-mini-beta": 0,
           "x-ai/grok-3-beta": 0
           }
 
-exercise_numbers = [
+exercise_numbers_old = [
     "2_non_degenerate_2",
     "2_positive_1", "2_positive_2",
     "2_reflexive_1", "2_reflexive_2",
     "3_11_1",
     "10_7_intermediate",
+]
+
+exercise_numbers_old2 = [
+    "2_non_degenerate_1",
+    "2_symmetric_1", "2_symmetric_2",
+    "2_triangle_inequality_1",
+    "3_11_2",
+    "4_9_1", "4_9_2",
+    "5_9_1",
+]
+
+exercise_numbers = [
+    "2_triangle_inequality_2",
+    "3_11_4",
+    "4_9_3",
+    "5_9_2",
+    "6_8_1", "6_8_2",
+    "10_7_3",
+    "10_7_6",
+    "11_not_closed", "11_not_open",
+    "13_11_2", "13_11_3"
 ]
 
 all_exercises = [
