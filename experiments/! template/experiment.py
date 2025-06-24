@@ -37,11 +37,12 @@ defs_no_context = False
 # expand all definitions in proof?
 defs_in_context = False
 
-# in this directory
+# in root directory
 prompt_filename = "generic_wp_prompt.txt"
 tutorial_filename = "tutorial.txt"
 revision_filename = "revision_prompt.txt"
 
+# in this directory
 base_dir = os.path.dirname(os.path.abspath(__file__))
 directory = "results"
 
